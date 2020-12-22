@@ -83,7 +83,7 @@ class _IntroState extends State<Intro> {
         ),
         _buildScreen(
           pageDecoration,
-          'Screen Five Title',
+          'Screen Five - 5 Title',
           'Instead of having to buy an entire share, invest any amount you want.',
           'intro_5',
         ),

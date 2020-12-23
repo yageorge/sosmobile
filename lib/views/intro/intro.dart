@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import './widgets/build_screen.dart';
 import '../auth/auth.dart';
 
 class Intro extends StatefulWidget {
@@ -19,29 +20,6 @@ class _IntroState extends State<Intro> {
     );
   }
 
-  // Image config build
-  Widget _buildImage(String assetName) {
-    return Align(
-      child: Image.asset('assets/images/app/$assetName.jpg', width: 350.0),
-      alignment: Alignment.bottomCenter,
-    );
-  }
-
-  // Screen model view
-  PageViewModel _buildScreen(
-    PageDecoration pageDecoration,
-    String title,
-    String body,
-    String imageName,
-  ) {
-    return PageViewModel(
-      title: title,
-      body: body,
-      image: _buildImage(imageName),
-      decoration: pageDecoration,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // Style and design
@@ -57,35 +35,29 @@ class _IntroState extends State<Intro> {
     return IntroductionScreen(
       key: introKey,
       pages: [
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen One Title',
+          'Screen 1 Titles',
           'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_1',
+          'intro_1.png',
         ),
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen Two Title',
+          'Screen 2 Title',
           'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_2',
+          'intro_2.png',
         ),
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen Three Title',
+          'Screen 3 Title',
           'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_3',
+          'intro_3.jpg',
         ),
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen Four Title',
+          'Screen 4 Title',
           'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_4',
-        ),
-        _buildScreen(
-          pageDecoration,
-          'Screen Five - 5 Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_5',
+          'intro_4.png',
         ),
       ],
       onDone: () => _onIntroEnd(context),

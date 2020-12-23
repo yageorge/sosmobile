@@ -48,3 +48,4 @@ flutter:
   assets: #sub-folders are unread, include each folder separately
     - assets/images/
     - assets/images/app/
+    - assets/images/users/

@@ -1,11 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 
 import './styles/theme.dart';
+import './core/routes.dart';
 
-import 'views/auth/auth.dart';
 import 'views/intro/intro.dart';
+import 'views/auth/auth.dart';
+import 'views/home/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
       title: 'Skill Optimizer',
       debugShowCheckedModeBanner: false,
       theme: buildThemeData(context),
-      home: Intro(),
+      routes: buildRoutes(context),
+      home: Home(),
     );
   }
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../components/main_background.dart';
-import 'components/footer_logo.dart';
-import 'components/auth_form.dart';
+import '../../widgets/images/main_background.dart';
+import 'widgets/footer_logo.dart';
+import 'widgets/auth_form.dart';
 
 class Auth extends StatefulWidget {
+  static const routeName = '/auth';
   @override
   _AuthState createState() => _AuthState();
 }

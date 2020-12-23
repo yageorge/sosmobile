@@ -13,25 +13,31 @@ class About extends StatelessWidget {
       drawer: AppDrawer(),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // SOS Logo and Details
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: companyLogoContainer(context),
-                ),
-                Center(
-                  child: Text('Managed by Skill Optimizer Solutions'),
-                ),
-                Center(
-                  child: Text('Developed by George Yaacoub'),
-                ),
-                Center(
-                  child: Text('+961 71 747740'),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: companyLogoContainer(context),
+            ),
+            Text(
+              'Skill Optimizer',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              'Digital Learning Platform',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            Divider(
+              height: 92,
+            ),
+            Text(
+              'Copyright © 2021 Skill Optimizer \n By George Yaacoub',
+              style: Theme.of(context).textTheme.headline2,
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              '+961 71 747740',
+              style: Theme.of(context).textTheme.headline2,
             ),
           ],
         ),

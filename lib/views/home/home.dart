@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             Text('ADD : NEW COURSES Section '),
-            Text('ADD : CURRENT ONGOING COURSES Section'),
+            Text('ADD : CURRENT ONGOING COURSES Section / Resume Course'),
           ],
         ),
       ),

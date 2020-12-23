@@ -8,7 +8,8 @@ import '../images/user/user_header.dart';
 import '../../views/auth/auth.dart';
 import '../../views/about/about.dart';
 import '../../views/home/home.dart';
-import '../../views/user/user_profile.dart';
+import '../../views/user_profile/user_profile.dart';
+import '../../widgets/navigation_bar/navigation_bar.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -40,12 +41,15 @@ class AppDrawer extends StatelessWidget {
                   },
                 ),
 
-                //
+                // Courses
                 drawerTab(
                   ctx: context,
-                  icon: Icons.category_outlined,
+                  icon: Icons.account_balance,
                   title: 'My Courses',
-                  onTapFn: () {},
+                  onTapFn: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(NavigationBar.routeName);
+                  },
                 ),
 
                 // Connect
@@ -96,8 +100,8 @@ class AppDrawer extends StatelessWidget {
 
                 // SOS Logo
                 companyLogo(
-                  height: 44,
-                  width: 44,
+                  height: 64,
+                  width: 64,
                 ),
               ],
             ),

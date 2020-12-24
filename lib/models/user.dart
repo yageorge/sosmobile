@@ -23,4 +23,16 @@ class User {
     @required this.createdAt,
     @required this.updatedAt,
   });
+
+  static User user = User(
+    id: 1,
+    firstName: "George",
+    lastName: "Yaacoub",
+    email: "gyaacoub@gmail.com",
+    pointsTarget: 28,
+    departmentId: 1,
+    departmentName: "Software Developers",
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  );
 }

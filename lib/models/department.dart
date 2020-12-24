@@ -12,4 +12,11 @@ class Department {
     @required this.createdAt,
     @required this.updatedAt,
   });
+
+  static Department department = Department(
+    id: 1,
+    name: "Software Developers",
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  );
 }

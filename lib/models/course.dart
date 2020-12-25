@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
-import '../models/lectures.dart';
+import 'courseCategory.dart';
+import './lectures.dart';
 
 class Course {
   final int id;
@@ -9,10 +10,9 @@ class Course {
   final int totalLectures;
   final int totalMinutes;
   final int points;
-  final int categoryId;
-  final String categoryName;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final CourseCategory category;
   final List<Lecture> lectures;
 
   Course({
@@ -23,26 +23,30 @@ class Course {
     @required this.totalLectures,
     @required this.totalMinutes,
     @required this.points,
-    @required this.categoryId,
-    @required this.categoryName,
     @required this.createdAt,
     @required this.updatedAt,
+    @required this.category,
     @required this.lectures,
   });
 
   static List<Course> coursesData = <Course>[
     Course(
       id: 1,
-      title: "Learn Flutter Framework",
-      description: "Learn Flutter Framwork and Dart Programming Language",
+      title: "Complete Course Flutter 2.2 Framework",
+      description: "Learn Flutter Framework and Dart Programming Language",
       imageUrl: "https://flutter.dev/images/catalog-widget-placeholder.png",
-      totalLectures: 46,
+      totalLectures: 146,
       totalMinutes: 234,
-      points: 7,
-      categoryId: 1,
-      categoryName: "Programming",
+      points: 76,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
+      category: CourseCategory(
+        id: 1,
+        name: "Programming",
+        colorVal: "0xFF0277BD",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ),
       lectures: [
         Lecture(
           id: 1,
@@ -71,16 +75,21 @@ class Course {
     Course(
       id: 2,
       title: "Learn ReactJS Framework",
-      description: "Learn ReactJS Framwork and Dart Programming Language",
+      description: "Learn ReactJS Framework and Dart Programming Language",
       imageUrl:
           "https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg",
       totalLectures: 66,
       totalMinutes: 124,
       points: 6,
-      categoryId: 1,
-      categoryName: "Programming",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
+      category: CourseCategory(
+        id: 1,
+        name: "Programming",
+        colorVal: "0xFF0277BD",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ),
       lectures: [
         Lecture(
           id: 3,
@@ -115,10 +124,15 @@ class Course {
       totalLectures: 9,
       totalMinutes: 14,
       points: 2,
-      categoryId: 2,
-      categoryName: "Social skills training",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
+      category: CourseCategory(
+        id: 2,
+        name: "Social skills training",
+        colorVal: "0xFF64DD17",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ),
       lectures: [
         Lecture(
           id: 5,
@@ -153,10 +167,15 @@ class Course {
       totalLectures: 6,
       totalMinutes: 28,
       points: 2,
-      categoryId: 3,
-      categoryName: "Safety",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
+      category: CourseCategory(
+        id: 3,
+        name: "Safety",
+        colorVal: "0xff9c27b0",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ),
       lectures: [
         Lecture(
           id: 7,

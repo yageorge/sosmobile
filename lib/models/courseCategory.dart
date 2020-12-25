@@ -1,34 +1,39 @@
 import 'package:flutter/foundation.dart';
 
-class Category {
+class CourseCategory {
   final int id;
   final String name;
+  final String colorVal;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  Category({
+  CourseCategory({
     @required this.id,
     @required this.name,
+    @required this.colorVal,
     @required this.createdAt,
     @required this.updatedAt,
   });
 
-  static List<Category> categoriesList = <Category>[
-    Category(
+  static List<CourseCategory> categoriesList = <CourseCategory>[
+    CourseCategory(
       id: 1,
       name: "Programming",
+      colorVal: "0xFF64DD17",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
-    Category(
+    CourseCategory(
       id: 2,
       name: "Social skills training",
+      colorVal: "0xFF0277BD",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),
-    Category(
+    CourseCategory(
       id: 3,
       name: "Safety",
+      colorVal: "0xff9c27b0",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     ),

@@ -4,12 +4,13 @@ import 'package:introduction_screen/introduction_screen.dart';
 
 import './styles/theme.dart';
 import './core/routes.dart';
+import './services/sharedPrefs.dart';
+import './services/app_router.dart';
 
-import 'views/intro/intro.dart';
-import 'views/auth/auth.dart';
-import 'views/home/home.dart';
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //Initializing shared preferences
+  await sharedPrefs.init();
   runApp(MyApp());
 }
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: buildThemeData(context),
       routes: buildRoutes(context),
-      home: Home(),
+      home: AppRouter(),
     );
   }
 }

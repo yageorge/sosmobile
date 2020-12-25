@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^0.5.12+4
   email_validator: ^1.0.6
   introduction_screen: ^1.0.9
 
@@ -46,6 +47,5 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets: #sub-folders are unread, include each folder separately
-    - assets/images/
     - assets/images/app/
     - assets/images/users/

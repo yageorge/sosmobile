@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../widgets/app_bar.dart';
-import '../../../widgets/drawer/app_drawer.dart';
+import '../../../../widgets/app_bar.dart';
+import '../../../../widgets/drawer/app_drawer.dart';
 
 class EnrolledCourses extends StatelessWidget {
   static const routeName = '/courses/enrolled';

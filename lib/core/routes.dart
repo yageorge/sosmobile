@@ -5,9 +5,9 @@ import '../views/about/about.dart';
 import '../views/home/home.dart';
 import '../views/user_profile/user_profile.dart';
 import '../widgets/navigation_bar/navigation_bar.dart';
-import '../views/courses/courses/courses.dart';
-import '../views/courses/completed/completed_courses.dart';
-import '../views/courses/enrolled/enrolled_courses.dart';
+import '../views/courses/list/courses/courses.dart';
+import '../views/courses/list/completed/completed_courses.dart';
+import '../views/courses/list/enrolled/enrolled_courses.dart';
 
 Map<String, Widget Function(BuildContext)> buildRoutes(BuildContext ctx) {
   return {

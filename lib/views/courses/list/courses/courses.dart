@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../widgets/app_bar.dart';
-import '../../../widgets/drawer/app_drawer.dart';
+import '../../../../services/sharedPrefs.dart';
+import '../../../../widgets/app_bar.dart';
+import '../../../../widgets/drawer/app_drawer.dart';
+import '../../../../widgets/loading_indicator.dart';
 
 import './widgets/courses_list_view.dart';
-import '../../../models/course.dart';
+import '../../../../models/course.dart';
 
 class Courses extends StatefulWidget {
   static const routeName = '/courses';
@@ -33,7 +35,10 @@ class _CoursesState extends State<Courses> {
         future: getCourses(),
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           if (!snapshot.hasData) {
-            return const SizedBox();
+            return loadingIndicator(
+              ctx: context,
+              deviceHeight: sharedPrefs.deviceHeight,
+            );
           } else {
             return CoursesListView(
               coursesData: coursesData,

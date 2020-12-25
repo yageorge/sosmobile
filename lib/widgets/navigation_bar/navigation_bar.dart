@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../drawer/app_drawer.dart';
 
-import '../../views/courses/courses/courses.dart';
-import '../../views/courses/completed/completed_courses.dart';
-import '../../views/courses/enrolled/enrolled_courses.dart';
+import '../../views/courses/list/courses/courses.dart';
+import '../../views/courses/list/completed/completed_courses.dart';
+import '../../views/courses/list/enrolled/enrolled_courses.dart';
 
 class NavigationBar extends StatefulWidget {
   static const routeName = '/navigation_bar';

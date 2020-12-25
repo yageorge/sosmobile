@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../models/course.dart';
 
-import './course_view.dart';
+import 'course_view/course_view.dart';
 
 class CoursesListView extends StatelessWidget {
   final List<Course> coursesData;

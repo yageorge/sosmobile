@@ -146,7 +146,7 @@ class Course {
     ),
     Course(
       id: 5,
-      title: "Fire Safety Training",
+      title: "Fire Safety Phase 1 / 24 Training",
       description: "Fire Safety Training description etc etc",
       imageUrl:
           "https://183263-537949-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/05/Fire-safety.jpg",

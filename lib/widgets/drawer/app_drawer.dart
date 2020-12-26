@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
                 drawerTab(
                   ctx: context,
                   icon: Icons.account_balance,
-                  title: 'My Courses',
+                  title: 'Courses',
                   onTapFn: () {
                     Navigator.of(context)
                         .pushReplacementNamed(NavigationBar.routeName);

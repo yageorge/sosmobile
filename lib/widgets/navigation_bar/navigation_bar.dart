@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../drawer/app_drawer.dart';
+import '../../helpers/enums/coursesTabs.dart';
 
 import '../../views/courses/list/courses/courses.dart';
 import '../../views/courses/list/completed/completed_courses.dart';
@@ -26,9 +27,9 @@ class _NavigationBarState extends State<NavigationBar> {
   // Load Navigation Bar Views
   void _setNavigationViews() {
     _views = [
-      {'screen': Courses(), 'title': 'My Courses'},
-      {'screen': EnrolledCourses(), 'title': 'Enrolled'},
-      {'screen': CompletedCourses(), 'title': 'Completed'},
+      {'screen': Courses(coursesTabs.all), 'title': 'Courses'},
+      {'screen': Courses(coursesTabs.enrolled), 'title': 'Enrolled'},
+      {'screen': Courses(coursesTabs.completed), 'title': 'Completed'},
     ];
   }
 
@@ -51,7 +52,7 @@ class _NavigationBarState extends State<NavigationBar> {
         unselectedItemColor: Colors.white,
         selectedIconTheme: IconThemeData(size: 30),
         items: [
-          // My Courses Tab
+          // Courses Tab
           BottomNavigationBarItem(
             label: _views[0]['title'],
             icon: Icon(Icons.account_balance),

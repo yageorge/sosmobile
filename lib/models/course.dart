@@ -14,6 +14,8 @@ class Course {
   final DateTime updatedAt;
   final CourseCategory category;
   final List<Lecture> lectures;
+  final bool isUserEnrolled;
+  final bool isComplete;
 
   Course({
     @required this.id,
@@ -27,6 +29,8 @@ class Course {
     @required this.updatedAt,
     @required this.category,
     @required this.lectures,
+    @required this.isUserEnrolled,
+    @required this.isComplete,
   });
 
   static List<Course> coursesData = <Course>[
@@ -49,7 +53,7 @@ class Course {
       ),
       lectures: [
         Lecture(
-          id: 1,
+          id: 0,
           title: "What is Flutter",
           content: "flutter detailssssss",
           urlVideo: "",
@@ -58,19 +62,83 @@ class Course {
           courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: true,
         ),
         Lecture(
           id: 1,
           title: "Install Flutter",
           content: "Install flutter detailssssss",
-          urlVideo: "",
+          urlVideo: "https://youtu.be/1ukSR1GRtMU",
           duration: 26,
           courseId: 1,
           courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: true,
+        ),
+        Lecture(
+          id: 2,
+          title: "Install Fluttersd fsdf sdf sdf ",
+          content: "Install flutter detailsssdf sdf sdf sdfssss",
+          urlVideo: "https://youtu.be/bKueYVtV0eA",
+          duration: 16,
+          courseId: 1,
+          courseName: "Learn Flutter Framework",
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isComplete: false,
+        ),
+        Lecture(
+          id: 3,
+          title: "Install Flusef sef sef sef se sftter",
+          content: "Installefsefsef flutter f",
+          urlVideo: "",
+          duration: 6,
+          courseId: 1,
+          courseName: "Learn Flutter Framework",
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isComplete: false,
+        ),
+        Lecture(
+          id: 4,
+          title: "Instwewefwfwefall Flusef sef sef sef se sftter",
+          content: "Installefswfweffsef flutter f",
+          urlVideo: "",
+          duration: 13,
+          courseId: 1,
+          courseName: "Learn Flutter Framework",
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isComplete: false,
+        ),
+        Lecture(
+          id: 7,
+          title: "Install Flusedddddf se sftter",
+          content: "Installefsefsef flutter f",
+          urlVideo: "",
+          duration: 6,
+          courseId: 1,
+          courseName: "Learn Flutter Framework",
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isComplete: false,
+        ),
+        Lecture(
+          id: 3,
+          title: "Install Fluswwwftter",
+          content: "Installefsefsef flutter f",
+          urlVideo: "",
+          duration: 6,
+          courseId: 1,
+          courseName: "Learn Flutter Framework",
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isComplete: false,
         ),
       ],
+      isUserEnrolled: true,
+      isComplete: false,
     ),
     Course(
       id: 2,
@@ -101,6 +169,7 @@ class Course {
           courseName: "Learn ReactJS Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: false,
         ),
         Lecture(
           id: 4,
@@ -112,8 +181,11 @@ class Course {
           courseName: "Learn React JS Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: false,
         ),
       ],
+      isUserEnrolled: true,
+      isComplete: false,
     ),
     Course(
       id: 4,
@@ -144,6 +216,7 @@ class Course {
           courseName: "Communicate Better",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: true,
         ),
         Lecture(
           id: 6,
@@ -155,8 +228,11 @@ class Course {
           courseName: "Communicate Better",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: false,
         ),
       ],
+      isUserEnrolled: false,
+      isComplete: true,
     ),
     Course(
       id: 5,
@@ -187,6 +263,7 @@ class Course {
           courseName: "Fire Safety Training",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: false,
         ),
         Lecture(
           id: 8,
@@ -198,8 +275,11 @@ class Course {
           courseName: "Fire Safety Training",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
+          isComplete: false,
         ),
       ],
+      isUserEnrolled: false,
+      isComplete: false,
     ),
   ];
 }

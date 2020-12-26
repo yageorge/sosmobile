@@ -11,6 +11,7 @@ class Lecture {
   final String courseName;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool isComplete;
 
   Lecture({
     @required this.id,
@@ -22,5 +23,6 @@ class Lecture {
     @required this.courseName,
     @required this.createdAt,
     @required this.updatedAt,
+    @required this.isComplete,
   });
 }

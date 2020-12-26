@@ -20,17 +20,15 @@ class CourseView extends StatelessWidget {
     final category = course.category;
     final categoryColor = Color(int.parse(category.colorVal));
 
-    onCourseTap(int courseId) {
-      Navigator.push<dynamic>(
-        context,
-        MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => CourseDetails(),
-            fullscreenDialog: true),
+    onCourseTap(Course course) {
+      Navigator.of(context).pushNamed(
+        CourseDetails.routeName,
+        arguments: course,
       );
     }
 
     return InkWell(
-      onTap: () => onCourseTap(1),
+      onTap: () => onCourseTap(course),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16.0)),
@@ -50,6 +48,7 @@ class CourseView extends StatelessWidget {
           child: Stack(children: [
             Column(
               children: [
+                //Course Image:
                 AspectRatio(
                   aspectRatio: 3,
                   child: Opacity(
@@ -83,7 +82,7 @@ class CourseView extends StatelessWidget {
                 ),
               ],
             ),
-            status(context),
+            if (course.isComplete) status(context),
           ]),
         ),
       ),

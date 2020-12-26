@@ -17,11 +17,11 @@ Widget status(BuildContext ctx) {
           bottomLeft: Radius.circular(16),
           topRight: Radius.circular(16),
         ),
-        color: Theme.of(ctx).primaryColor.withOpacity(0.7),
+        color: Theme.of(ctx).primaryColor.withOpacity(0.8),
       ),
       child: Icon(
         Icons.done,
-        color: Theme.of(ctx).scaffoldBackgroundColor,
+        color: Colors.white,
         size: 18,
       ),
     ),

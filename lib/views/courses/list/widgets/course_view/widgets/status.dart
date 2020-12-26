@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:sosmobile/services/sharedPrefs.dart';
 
-// Course status (On-going / Completed)
-// Pending .. all-hardcoded
-Widget status(BuildContext ctx) {
+// Course status Enrolled / Complete
+Widget status({
+  BuildContext ctx,
+  bool isComplete,
+}) {
   return Positioned(
     width: 32,
     height: 32,
@@ -20,7 +22,7 @@ Widget status(BuildContext ctx) {
         color: Theme.of(ctx).primaryColor.withOpacity(0.8),
       ),
       child: Icon(
-        Icons.done,
+        isComplete ? Icons.done : Icons.widgets_outlined,
         color: Colors.white,
         size: 18,
       ),

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../models/lectures.dart';
 
-import './widgets/lecture_view.dart';
+import 'widgets/lecture_summary.dart';
 
 class Lectures extends StatelessWidget {
+  static const routeName = '/lectures';
+
   final List<Lecture> lectures;
   final Color categoryColor;
 
@@ -28,9 +30,9 @@ class Lectures extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (ctx, i) => Padding(
                 padding: const EdgeInsets.only(top: 6),
-                child: LectureView(
-                  index: i + 1,
-                  lecture: lectures[i],
+                child: LectureSummary(
+                  index: i,
+                  lectures: lectures,
                   categoryColor: categoryColor,
                 ),
               ),

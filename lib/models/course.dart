@@ -102,7 +102,7 @@ class Course {
         ),
         Lecture(
           id: 4,
-          title: "Instwewefwfwefall Flusef sef sef sef se sftter",
+          title: "Instwewefwfwefall Flusef sef sef sef se sftasdasdasdter",
           content: "Installefswfweffsef flutter f",
           urlVideo: "",
           duration: 13,
@@ -110,7 +110,7 @@ class Course {
           courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
-          isComplete: false,
+          isComplete: true,
         ),
         Lecture(
           id: 7,
@@ -231,7 +231,7 @@ class Course {
           isComplete: false,
         ),
       ],
-      isUserEnrolled: false,
+      isUserEnrolled: true,
       isComplete: true,
     ),
     Course(

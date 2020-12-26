@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sosmobile/views/courses/list/courses/widgets/course_view/widgets/header.dart';
+import 'package:sosmobile/views/courses/list/widgets/course_view/widgets/header.dart';
 
-import '../../../../course/courseDetails.dart';
-import '../../../../../../models/course.dart';
+import '../../../course/course_details.dart';
+import '../../../../../models/course.dart';
 
 import 'widgets/properties.dart';
 import 'widgets/status.dart';
 
-class CourseView extends StatelessWidget {
+class CourseSummary extends StatelessWidget {
   final Course course;
 
-  const CourseView({
+  const CourseSummary({
     Key key,
     this.course,
   }) : super(key: key);
@@ -82,7 +82,13 @@ class CourseView extends StatelessWidget {
                 ),
               ],
             ),
-            if (course.isComplete) status(context),
+
+            // Course status None / Enrolled / Complete
+            if (course.isUserEnrolled)
+              status(
+                ctx: context,
+                isComplete: course.isComplete,
+              ),
           ]),
         ),
       ),

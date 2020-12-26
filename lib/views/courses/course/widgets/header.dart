@@ -1,5 +1,6 @@
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'package:sosmobile/models/course.dart';
 import 'package:sosmobile/models/courseCategory.dart';
 
@@ -64,6 +65,18 @@ Widget getHeader(
               style: Theme.of(ctx).textTheme.headline2,
             ),
           ],
+        ),
+
+        // Date created
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 6.0,
+            bottom: 4.0,
+          ),
+          child: Text(
+            'Added: ${DateFormat.yMMMd().format(course.createdAt)}',
+            style: Theme.of(ctx).textTheme.headline2,
+          ),
         ),
       ],
     ),

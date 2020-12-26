@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:sosmobile/models/lectures.dart';
 
 import '../../../widgets/app_bar.dart';
 import '../../../models/course.dart';
-import './widgets/header.dart';
-import './widgets/properties.dart';
+import 'widgets/header.dart';
+import 'widgets/properties.dart';
+import 'widgets/enroll_button.dart';
 import '../../lectures/list/lectures.dart';
 
 class CourseDetails extends StatelessWidget {
@@ -48,28 +48,26 @@ class CourseDetails extends StatelessWidget {
                   categoryColor,
                 ),
 
-                // Enroll Button / Already Enrolled
-                Container(
-                  margin: EdgeInsets.only(
-                    top: 6,
-                  ),
-                  width: double.infinity,
-                  child: RaisedButton(
-                    color: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text('Enroll / Already Enrolled'),
-                    onPressed: () {},
+                Padding(
+                  padding: const EdgeInsets.only(top: 14),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Enroll Button
+                      getEnrollButton(
+                        context,
+                        course,
+                      ),
+                      // number of Lectures - minutes - points
+                      getProperties(
+                        context,
+                        course,
+                        categoryColor,
+                      ),
+                    ],
                   ),
                 ),
 
-                // number of Lectures - minutes - points
-                getProperties(
-                  context,
-                  course,
-                  categoryColor,
-                ),
                 // Course lectures
                 Lectures(
                   lectures: course.lectures,

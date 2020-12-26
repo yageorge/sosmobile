@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/course.dart';
+import '../../../../models/course.dart';
 
-import 'course_view/course_view.dart';
+import 'course_view/course_summary.dart';
 
 class CoursesListView extends StatelessWidget {
   final List<Course> coursesData;
@@ -24,7 +24,7 @@ class CoursesListView extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (ctx, i) => Padding(
           padding: const EdgeInsets.only(bottom: 24),
-          child: CourseView(
+          child: CourseSummary(
             course: coursesData[i],
           ),
         ),

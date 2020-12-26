@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import '../drawer/app_drawer.dart';
 import '../../helpers/enums/coursesTabs.dart';
 
-import '../../views/courses/list/courses/courses.dart';
-import '../../views/courses/list/completed/completed_courses.dart';
-import '../../views/courses/list/enrolled/enrolled_courses.dart';
+import '../../views/courses/list/courses.dart';
 
 class NavigationBar extends StatefulWidget {
   static const routeName = '/navigation_bar';

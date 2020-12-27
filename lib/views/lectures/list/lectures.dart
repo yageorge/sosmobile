@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/lectures.dart';
+import '../../../models/course.dart';
+import '../../../models/lecture.dart';
 
 import 'widgets/lecture_summary.dart';
 
 class Lectures extends StatelessWidget {
   static const routeName = '/lectures';
 
-  final List<Lecture> lectures;
-  final Color categoryColor;
+  final Course course;
 
   const Lectures({
     Key key,
-    this.lectures,
-    this.categoryColor,
+    this.course,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final List<Lecture> lectures = course.lectures;
     return Padding(
         padding: const EdgeInsets.only(top: 8),
         child: Column(
@@ -33,7 +34,7 @@ class Lectures extends StatelessWidget {
                 child: LectureSummary(
                   index: i,
                   lectures: lectures,
-                  categoryColor: categoryColor,
+                  course: course,
                 ),
               ),
             ),

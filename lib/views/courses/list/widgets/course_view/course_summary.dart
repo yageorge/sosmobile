@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sosmobile/views/courses/list/widgets/course_view/widgets/header.dart';
 
-import '../../../course/course_details.dart';
 import '../../../../../models/course.dart';
+import '../../../course/course_details.dart';
+
+import '../../../widgets/course_image.dart';
+import '../../../widgets/course_header.dart';
 
 import 'widgets/properties.dart';
 import 'widgets/status.dart';
@@ -49,27 +51,25 @@ class CourseSummary extends StatelessWidget {
             Column(
               children: [
                 //Course Image:
-                AspectRatio(
-                  aspectRatio: 3,
-                  child: Opacity(
-                    opacity: 0.9,
-                    child: Image.network(
-                      course.imageUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                getCourseImage(
+                  ratio: 3,
+                  opacity: 0.9,
+                  imageUrl: course.imageUrl,
                 ),
+
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       // Course name + category
-                      getHeader(
-                        context,
-                        course,
-                        category,
-                        categoryColor,
+                      Expanded(
+                        child: getCourseHeader(
+                          context,
+                          course.title,
+                          category.name,
+                          categoryColor,
+                        ),
                       ),
 
                       // number of Lectures - minutes - points

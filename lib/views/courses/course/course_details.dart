@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../../widgets/app_bar.dart';
-import '../../../models/course.dart';
+import '../widgets/course_image.dart';
 import 'widgets/header.dart';
 import 'widgets/properties.dart';
 import 'widgets/enroll_button.dart';
+
+import '../../../models/course.dart';
 import '../../lectures/list/lectures.dart';
 
 class CourseDetails extends StatelessWidget {
@@ -29,18 +31,13 @@ class CourseDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Course image
-                AspectRatio(
-                  aspectRatio: 3,
-                  child: Opacity(
-                    opacity: 0.9,
-                    child: Image.network(
-                      course.imageUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                getCourseImage(
+                  ratio: 3,
+                  opacity: 0.9,
+                  imageUrl: course.imageUrl,
                 ),
 
-                // Course name + category
+                // Course name + category + date
                 getHeader(
                   context,
                   course,
@@ -70,8 +67,7 @@ class CourseDetails extends StatelessWidget {
 
                 // Course lectures
                 Lectures(
-                  lectures: course.lectures,
-                  categoryColor: categoryColor,
+                  course: course,
                 ),
               ],
             ),

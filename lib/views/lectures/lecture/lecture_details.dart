@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/courseCategory.dart';
+import '../../../models/course.dart';
+import '../../../models/lecture.dart';
+
+import '../video/video_player.dart';
 import '../../../widgets/app_bar.dart';
-import '../../../models/lectures.dart';
+import '../../courses/widgets/course_image.dart';
+import '../../courses/widgets/course_header.dart';
+import 'widgets/body.dart';
+import 'widgets/nav_buttons.dart';
 
 class LectureDetails extends StatefulWidget {
   static const routeName = '/lecture';
@@ -11,45 +19,113 @@ class LectureDetails extends StatefulWidget {
 }
 
 class _LectureDetailsState extends State<LectureDetails> {
+  Course course;
+  CourseCategory category;
+  Color categoryColor;
+  List<Lecture> lectures;
+  int index;
+
+  Future initData() async {
+    // Retrieving modalRoute arguments as params
+    final args = ModalRoute.of(context).settings.arguments as Map;
+    course = args['course'];
+    category = course.category;
+    categoryColor = Color(int.parse(category.colorVal));
+    lectures = args['lectures'];
+    index = args['index'];
+  }
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    // Init data variables
+    await initData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Retrieving Lectures + current lecture index as args
-    final args = ModalRoute.of(context).settings.arguments as Map;
-    List<Lecture> lectures = args['lectures'];
-    print('rerunnnnn');
-    int index = args['index'];
-
-// problem is: index is reloading everytime in build
-// need to receive it in state , can try again receiving it as constructor
-
-    void nextLecture() {
+    // Handle previous lecture tap
+    void previousLecture() {
+      // TODO
+      // Should mark Lecture as done as well
       setState(() {
-        print('before: $index');
+        index = index - 1;
+      });
+    }
+
+    // Handle next lecture tap
+    void nextLecture() {
+      // TODO
+      // Should mark Lecture as done as well
+      setState(() {
         index = index + 1;
-        print('after: $index');
       });
     }
 
     return Scaffold(
-      // no drawer / show back button
       appBar: appBar(context, 'Lecture'),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Title: ${lectures[index].title}'),
-                Text('Content: ${lectures[index].content}'),
-                Text('url video: ${lectures[index].urlVideo}'),
-                RaisedButton(
-                  child: Text('next'),
-                  onPressed: () => nextLecture(),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      //Course Image:
+                      getCourseImage(
+                        ratio: 5,
+                        opacity: 0.9,
+                        imageUrl: course.imageUrl,
+                      ),
+
+                      // Course name + category
+                      Container(
+                        margin: EdgeInsets.only(bottom: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                            bottom: Radius.circular(16.0),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: categoryColor.withOpacity(0.2),
+                              blurRadius: 3.0,
+                            )
+                          ],
+                        ),
+                        child: getCourseHeader(
+                          context,
+                          course.title,
+                          category.name,
+                          categoryColor,
+                        ),
+                      ),
+
+                      // Lecture Body:
+                      getLectureBody(
+                        ctx: context,
+                        index: index,
+                        lecture: lectures[index],
+                      ),
+
+                      // Video Rendering
+                      VideoPlayer(),
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+
+              // Buttons Previous Next
+              getNavButtons(
+                index: index,
+                lecturesLength: lectures.length,
+                previousLectureFn: () => previousLecture(),
+                nextLectureFn: () => nextLecture(),
+              ),
+            ],
           ),
         ),
       ),

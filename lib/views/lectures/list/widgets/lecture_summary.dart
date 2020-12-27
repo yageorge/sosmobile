@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:sosmobile/services/sharedPrefs.dart';
 
 import '../../lecture/lecture_details.dart';
-import '../../../../models/lectures.dart';
+import '../../../../models/lecture.dart';
+import '../../../../models/course.dart';
 
 class LectureSummary extends StatelessWidget {
   final int index;
   final List<Lecture> lectures;
-  final Color categoryColor;
+  final Course course;
 
+  // Receiving selected lecture index + all lectures + categoryColor
   const LectureSummary({
     Key key,
     this.index,
     this.lectures,
-    this.categoryColor,
+    this.course,
   }) : super(key: key);
 
   @override
@@ -26,13 +28,19 @@ class LectureSummary extends StatelessWidget {
     ) {
       Navigator.of(context).pushNamed(
         LectureDetails.routeName,
-        arguments: {'lectures': lectures, 'index': indexLecture},
+        // Sending arguments params: Course + All lectures + current lecture index
+        arguments: {
+          'course': course,
+          'lectures': lectures,
+          'index': indexLecture
+        },
       );
-      // Navigator.of(context).push(MaterialPageRoute(
-      //     builder: (context) => LectureDetails(lectures, indexLecture)));
     }
 
+    // Saving the current lecture + category color
     Lecture _lecture = lectures[index];
+    Color categoryColor = Color(int.parse(course.category.colorVal));
+
     return InkWell(
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -88,9 +96,12 @@ class LectureSummary extends StatelessWidget {
 
             // Lecture Status
             if (_lecture.isComplete)
-              Icon(
-                Icons.done,
-                color: Theme.of(context).accentColor,
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: Icon(
+                  Icons.done,
+                  color: Theme.of(context).accentColor,
+                ),
               ),
           ],
         ),

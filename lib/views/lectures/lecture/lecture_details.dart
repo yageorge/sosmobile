@@ -112,7 +112,8 @@ class _LectureDetailsState extends State<LectureDetails> {
                       ),
 
                       // Video Rendering
-                      VideoPlayer(),
+                      if (lectures[index].urlVideo.isNotEmpty)
+                        VideoPlayer(videoId: lectures[index].urlVideo,),
                     ],
                   ),
                 ),

@@ -12,6 +12,7 @@ import '../../../models/course.dart';
 class Courses extends StatefulWidget {
   static const routeName = '/courses';
 
+  // constructor enum for coursesTab name (All/Enrolled/Compelted)
   final coursesTabs coursesTab;
 
   Courses(this.coursesTab);
@@ -40,6 +41,7 @@ class _CoursesState extends State<Courses> {
     return _filteredCoursesData;
   }
 
+  // Fetching Courses
   Future<bool> getCourses() async {
     // Delay test
     await Future<dynamic>.delayed(const Duration(milliseconds: 500));

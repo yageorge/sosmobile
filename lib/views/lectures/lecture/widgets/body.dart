@@ -9,6 +9,7 @@ Widget getLectureBody({
   Lecture lecture,
 }) {
   return Container(
+    padding: const EdgeInsets.only(bottom: 12.0),
     width: double.infinity,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

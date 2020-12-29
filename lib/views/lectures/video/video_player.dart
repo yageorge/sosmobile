@@ -54,6 +54,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
               margin: EdgeInsets.only(top: 16, bottom: 16),
               child: YoutubePlayer(
                 controller: _controller,
+                showVideoProgressIndicator: true,
+                progressIndicatorColor: Colors.red,
                 liveUIColor: Colors.amber,
                 thumbnail: Image.network(
                   "https://img.youtube.com/vi/$_videoId/hqdefault.jpg",

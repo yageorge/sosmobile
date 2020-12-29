@@ -7,9 +7,6 @@ import './core/routes.dart';
 import './services/sharedPrefs.dart';
 import './services/app_router.dart';
 
-// TO DELETE:
-import 'views/lectures/video/test_youtube.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //Initializing shared preferences

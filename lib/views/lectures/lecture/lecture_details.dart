@@ -126,7 +126,7 @@ class _LectureDetailsState extends State<LectureDetails> {
                         lecture: lectures[index],
                       ),
 
-                      // Video Rendering
+                      // Video Thumbnail Button
                       if (lectures[index].urlVideo.isNotEmpty)
                         getVideoButton(
                           ctx: context,

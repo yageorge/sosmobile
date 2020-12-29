@@ -88,7 +88,8 @@ You can compare Dart's syntax to JavaScript''',
         Lecture(
           id: 1,
           title: "Install Flutter - Vid 1",
-          content: "Install flutter detailssssss",
+          content:
+              "This year, mobile applications continued to become more and more popular. Fortunately there are many programming tools available to developers who want to create them. Among these tools there is Flutter, which has distinguished itself lately",
           urlVideo: "https://youtu.be/1ukSR1GRtMU",
           duration: 26,
           courseId: 1,

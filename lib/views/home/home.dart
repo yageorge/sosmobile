@@ -4,6 +4,10 @@ import '../../services/sharedPrefs.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/drawer/app_drawer.dart';
 
+import 'widgets/latest_course.dart';
+import 'widgets/inprogress_course.dart';
+import 'widgets/user_state_summary.dart';
+
 class Home extends StatelessWidget {
   static const routeName = '/home';
 
@@ -13,13 +17,20 @@ class Home extends StatelessWidget {
       drawer: AppDrawer(),
       appBar: appBar(context, 'Home'),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(' device Width: ${sharedPrefs.deviceWidth}'),
-            Text(' device Width: ${sharedPrefs.deviceHeight}'),
-            Text('ADD : NEW COURSES Section '),
-            Text('ADD : CURRENT ONGOING COURSES Section / Resume Course'),
-          ],
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              // Most recent course:
+              getLatestCourse(context),
+
+              // In Progress course:
+              getInProgressCourse(context),
+
+              // Total completed + total Points
+              getUserStateSummary(context),
+            ],
+          ),
         ),
       ),
     );

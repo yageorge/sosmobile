@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../models/courseCategory.dart';
 import '../../../models/course.dart';
 import '../../../models/lecture.dart';
 
-import '../video/video_player.dart';
-import '../../../widgets/app_bar.dart';
 import '../../courses/widgets/course_image.dart';
 import '../../courses/widgets/course_header.dart';
+import '../../../widgets/app_bar.dart';
 import 'widgets/body.dart';
 import 'widgets/nav_buttons.dart';
+import 'widgets/video_button.dart';
 
 class LectureDetails extends StatefulWidget {
   static const routeName = '/lecture';
@@ -24,6 +25,16 @@ class _LectureDetailsState extends State<LectureDetails> {
   Color categoryColor;
   List<Lecture> lectures;
   int index;
+  String urlVideo;
+  String urlId;
+
+  // loading video info if existing:
+  void loadUrlVideo(int _index) {
+    if (lectures[_index].urlVideo.isNotEmpty) {
+      urlVideo = lectures[_index].urlVideo;
+      urlId = YoutubePlayer.convertUrlToId(urlVideo);
+    }
+  }
 
   Future initData() async {
     // Retrieving modalRoute arguments as params
@@ -33,6 +44,8 @@ class _LectureDetailsState extends State<LectureDetails> {
     categoryColor = Color(int.parse(category.colorVal));
     lectures = args['lectures'];
     index = args['index'];
+
+    loadUrlVideo(index);
   }
 
   @override
@@ -50,6 +63,7 @@ class _LectureDetailsState extends State<LectureDetails> {
       // Should mark Lecture as done as well
       setState(() {
         index = index - 1;
+        loadUrlVideo(index);
       });
     }
 
@@ -59,6 +73,7 @@ class _LectureDetailsState extends State<LectureDetails> {
       // Should mark Lecture as done as well
       setState(() {
         index = index + 1;
+        loadUrlVideo(index);
       });
     }
 
@@ -113,7 +128,10 @@ class _LectureDetailsState extends State<LectureDetails> {
 
                       // Video Rendering
                       if (lectures[index].urlVideo.isNotEmpty)
-                        VideoPlayer(videoId: lectures[index].urlVideo,),
+                        getVideoButton(
+                          ctx: context,
+                          urlId: urlId,
+                        ),
                     ],
                   ),
                 ),

@@ -8,6 +8,7 @@ import '../widgets/navigation_bar/navigation_bar.dart';
 import '../views/courses/list/courses.dart';
 import '../views/courses/course/course_details.dart';
 import '../views/lectures/lecture/lecture_details.dart';
+import '../views/lectures/video/video_player.dart';
 
 import '../helpers/enums/coursesTabs.dart';
 
@@ -21,5 +22,6 @@ Map<String, Widget Function(BuildContext)> buildRoutes(BuildContext ctx) {
     Courses.routeName: (ctx) => Courses(coursesTabs.all),
     CourseDetails.routeName: (ctx) => CourseDetails(),
     LectureDetails.routeName: (ctx) => LectureDetails(),
+    VideoPlayer.routeName: (ctx) => VideoPlayer(),
   };
 }

@@ -7,7 +7,6 @@ import '../../../models/lecture.dart';
 
 import '../../courses/widgets/course_image.dart';
 import '../../courses/widgets/course_header.dart';
-import '../../../widgets/app_bar.dart';
 import 'widgets/body.dart';
 import 'widgets/nav_buttons.dart';
 import 'widgets/video_button.dart';
@@ -78,7 +77,6 @@ class _LectureDetailsState extends State<LectureDetails> {
     }
 
     return Scaffold(
-      appBar: appBar(context, 'Lecture'),
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: ClipRRect(
@@ -87,53 +85,73 @@ class _LectureDetailsState extends State<LectureDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      //Course Image:
-                      getCourseImage(
-                        ratio: 5,
-                        opacity: 0.9,
-                        imageUrl: course.imageUrl,
+                // Using CustomScrollView to work with animations
+                child: CustomScrollView(
+                  slivers: [
+                    // Animated SliverAppBar
+                    SliverAppBar(
+                      iconTheme: IconThemeData(
+                        color: Colors.grey[900],
                       ),
+                      expandedHeight: 132.0,
+                      floating: true,
+                      pinned: true,
+                      snap: true,
+                      backgroundColor: categoryColor,
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: getCourseImage(
+                          ratio: 5,
+                          opacity: 0.9,
+                          imageUrl: course.imageUrl,
+                        ),
+                      ),
+                    ),
 
-                      // Course name + category
-                      Container(
-                        margin: EdgeInsets.only(bottom: 16),
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.vertical(
-                            bottom: Radius.circular(16.0),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: categoryColor.withOpacity(0.2),
-                              blurRadius: 3.0,
-                            )
+                    //Children items:
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        Column(
+                          children: [
+                            // Course name + category
+                            Container(
+                              margin: EdgeInsets.only(bottom: 16),
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.vertical(
+                                  bottom: Radius.circular(16.0),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: categoryColor.withOpacity(0.2),
+                                    blurRadius: 3.0,
+                                  )
+                                ],
+                              ),
+                              child: getCourseHeader(
+                                context,
+                                course.title,
+                                category.name,
+                                categoryColor,
+                              ),
+                            ),
+
+                            // Lecture Body:
+                            getLectureBody(
+                              ctx: context,
+                              index: index,
+                              lecture: lectures[index],
+                            ),
+
+                            // Video Thumbnail Button
+                            if (lectures[index].urlVideo.isNotEmpty)
+                              getVideoButton(
+                                ctx: context,
+                                urlId: urlId,
+                              ),
                           ],
                         ),
-                        child: getCourseHeader(
-                          context,
-                          course.title,
-                          category.name,
-                          categoryColor,
-                        ),
-                      ),
-
-                      // Lecture Body:
-                      getLectureBody(
-                        ctx: context,
-                        index: index,
-                        lecture: lectures[index],
-                      ),
-
-                      // Video Thumbnail Button
-                      if (lectures[index].urlVideo.isNotEmpty)
-                        getVideoButton(
-                          ctx: context,
-                          urlId: urlId,
-                        ),
-                    ],
-                  ),
+                      ]),
+                    ),
+                  ],
                 ),
               ),
 

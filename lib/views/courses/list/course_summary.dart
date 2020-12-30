@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/course.dart';
-import '../../../course/course_details.dart';
+import '../../../models/course.dart';
+import '../../../models/lecture.dart';
+import '../course/course_details.dart';
 
-import '../../../widgets/course_image.dart';
-import '../../../widgets/course_header.dart';
+import '../../../widgets/percent_indicator.dart';
+import '../widgets/course_image.dart';
+import '../widgets/course_header.dart';
 
 import 'widgets/properties.dart';
 import 'widgets/status.dart';
@@ -19,8 +21,9 @@ class CourseSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final category = course.category;
-    final categoryColor = Color(int.parse(category.colorVal));
+    final List<Lecture> _lectures = course.lectures;
+    final _category = course.category;
+    final _categoryColor = Color(int.parse(_category.colorVal));
 
     onCourseTap(Course course) {
       Navigator.of(context).pushNamed(
@@ -36,7 +39,7 @@ class CourseSummary extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           boxShadow: [
             BoxShadow(
-              color: categoryColor.withOpacity(0.2),
+              color: _categoryColor.withOpacity(0.2),
               blurRadius: 3.0,
               offset: Offset(
                 1.0, // horizontal, move right 10
@@ -49,6 +52,7 @@ class CourseSummary extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           child: Stack(children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //Course Image:
                 getCourseImage(
@@ -67,8 +71,8 @@ class CourseSummary extends StatelessWidget {
                         child: getCourseHeader(
                           context,
                           course.title,
-                          category.name,
-                          categoryColor,
+                          _category.name,
+                          _categoryColor,
                         ),
                       ),
 
@@ -80,6 +84,13 @@ class CourseSummary extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                // Percent Progress indicator
+                if (course.isUserEnrolled)
+                  getPercentIndicator(
+                    ctx: context,
+                    lectures: _lectures,
+                  ),
               ],
             ),
 

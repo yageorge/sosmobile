@@ -28,7 +28,9 @@ class Home extends StatelessWidget {
               getInProgressCourse(context),
 
               // Total completed + total Points
-              getUserStateSummary(context),
+              getUserStateSummary(
+                ctx: context,
+              ),
             ],
           ),
         ),

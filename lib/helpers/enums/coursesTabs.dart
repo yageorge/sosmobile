@@ -1,5 +1,5 @@
 enum coursesTabs {
   all,
-  enrolled,
+  inProgress,
   completed,
 }

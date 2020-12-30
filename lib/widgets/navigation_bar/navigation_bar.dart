@@ -26,7 +26,7 @@ class _NavigationBarState extends State<NavigationBar> {
   void _setNavigationViews() {
     _views = [
       {'screen': Courses(coursesTabs.all), 'title': 'Courses'},
-      {'screen': Courses(coursesTabs.enrolled), 'title': 'Enrolled'},
+      {'screen': Courses(coursesTabs.inProgress), 'title': 'In Progress'},
       {'screen': Courses(coursesTabs.completed), 'title': 'Completed'},
     ];
   }
@@ -56,7 +56,7 @@ class _NavigationBarState extends State<NavigationBar> {
             icon: Icon(Icons.account_balance),
           ),
 
-          // Enrolled Courses
+          // InProgress Courses
           BottomNavigationBarItem(
             label: _views[1]['title'],
             icon: Icon(Icons.widgets_outlined),

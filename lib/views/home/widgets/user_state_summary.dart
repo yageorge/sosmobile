@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
 
-Widget getUserStateSummary(
+Widget getUserStateSummary({BuildContext ctx}) {
+  return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+    getState(
+      ctx: ctx,
+      title: 'Points',
+      value: 23,
+      image: 'assets/images/app/points_progress.png',
+      color: Theme.of(ctx).primaryColor,
+    ),
+    getState(
+      ctx: ctx,
+      title: 'Completed Courses',
+      value: 4,
+      image: 'assets/images/app/courses_progress.png',
+      color: Colors.blue[900],
+    ),
+  ]);
+}
+
+Widget getState({
   BuildContext ctx,
-) {
+  String title,
+  int value,
+  String image,
+  Color color,
+}) {
   return Stack(children: [
     Container(
-      padding: const EdgeInsets.only(bottom: 18.0),
       width: 126,
       height: 116,
       decoration: BoxDecoration(
@@ -16,21 +38,31 @@ Widget getUserStateSummary(
         ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Top status image
           ClipRRect(
             borderRadius:
                 const BorderRadius.vertical(top: Radius.circular(22.0)),
             child: Image.asset(
-              'assets/images/app/points_progress.png',
+              image,
               width: 126.0,
               height: 52,
               fit: BoxFit.cover,
             ),
           ),
-          Text(
-            'Total Points',
-            style: Theme.of(ctx).textTheme.headline4,
+
+          // Status title
+          Container(
+            height: 60,
+            child: Center(
+              child: Text(
+                title,
+                style: Theme.of(ctx).textTheme.headline6.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
         ],
       ),
@@ -40,25 +72,30 @@ Widget getUserStateSummary(
     Positioned(
       width: 58,
       height: 42,
-      top: 24,
-      left: 42,
-      child: Container(
-        padding: const EdgeInsets.all(3.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12),
+      top: 18,
+      left: 36,
+      child: Opacity(
+        opacity: 0.9,
+        child: Container(
+          padding: const EdgeInsets.all(3.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+            color: color,
+            border: Border.all(
+              color: Colors.white,
+              width: 1,
+            ),
           ),
-          color: Theme.of(ctx).primaryColor,
-          border: Border.all(
-            color: Colors.white,
-            width: 1,
-          ),
-        ),
-        child: Center(
-          child: Text(
-            '23',
-            style: Theme.of(ctx).textTheme.headline6.copyWith(fontSize: 24),
-            textAlign: TextAlign.center,
+          child: Center(
+            child: Text(
+              value.toString(),
+              style: Theme.of(ctx).textTheme.headline6.copyWith(
+                    fontSize: 24,
+                  ),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

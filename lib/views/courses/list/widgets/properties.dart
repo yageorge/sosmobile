@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sosmobile/models/course.dart';
 
-import '../../../../../../helpers/minutes_to_string.dart';
+import '../../../../helpers/minutes_to_string.dart';
 
 Widget property({
   BuildContext ctx,

@@ -4,7 +4,7 @@ import 'package:sosmobile/models/course.dart';
 import 'package:sosmobile/models/lecture.dart';
 import 'package:sosmobile/models/courseCategory.dart';
 
-import '../../courses/list/widgets/course_view/course_summary.dart';
+import '../../courses/list/course_summary.dart';
 
 Widget getLatestCourse(
   BuildContext ctx,
@@ -16,10 +16,10 @@ Widget getLatestCourse(
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 6.0),
-          child: Text(
-            'LATEST',
-            style: Theme.of(ctx).textTheme.headline6,
-          ),
+          child: Text('LATEST',
+              style: Theme.of(ctx).textTheme.headline6.copyWith(
+                    color: Colors.grey,
+                  )),
         ),
         CourseSummary(
           //TODO convert this hard-coded course, into a fetch method that gets the most recent course

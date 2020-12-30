@@ -6,13 +6,13 @@ import '../../../widgets/drawer/app_drawer.dart';
 import '../../../widgets/loading_indicator.dart';
 import '../../../helpers/enums/coursesTabs.dart';
 
-import './widgets/courses_list_view.dart';
+import 'courses_list_view.dart';
 import '../../../models/course.dart';
 
 class Courses extends StatefulWidget {
   static const routeName = '/courses';
 
-  // constructor enum for coursesTab name (All/Enrolled/Compelted)
+  // constructor enum for coursesTab name (All/InProgress/Compelted)
   final coursesTabs coursesTab;
 
   Courses(this.coursesTab);
@@ -24,14 +24,15 @@ class Courses extends StatefulWidget {
 class _CoursesState extends State<Courses> {
   List<Course> filteredCoursesData;
 
-  // Filtering courses as All / Enrolled / Completed
+  // Filtering courses as All / InProgress / Completed
   Future<List<Course>> filterCourses(List<Course> coursesData) async {
     List<Course> _filteredCoursesData = coursesData;
 
-    if (widget.coursesTab == coursesTabs.enrolled) {
-      // Filtering for enrolled courses only
-      _filteredCoursesData =
-          coursesData.where((Course course) => course.isUserEnrolled).toList();
+    if (widget.coursesTab == coursesTabs.inProgress) {
+      // Filtering for In Progress courses only
+      _filteredCoursesData = coursesData
+          .where((Course course) => course.isUserEnrolled && !course.isComplete)
+          .toList();
     } else if (widget.coursesTab == coursesTabs.completed) {
       // Filtering for completed courses only
       _filteredCoursesData =

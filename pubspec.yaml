@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.12.2
   intl: ^0.16.1 #to handle dates
   shared_preferences: ^0.5.12+4
   email_validator: ^1.0.6

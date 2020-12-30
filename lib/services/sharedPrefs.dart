@@ -14,6 +14,13 @@ class SharedPrefs {
     return _sharedPrefs.clear();
   }
 
+  // API URL address
+  set apiUrl(String value) {
+    _sharedPrefs.setString("apiUrl", value);
+  }
+
+  String get apiUrl => _sharedPrefs.getString("apiUrl") ?? "";
+
   // Device Width
   set deviceWidth(double value) {
     _sharedPrefs.setDouble("deviceWidth", value);

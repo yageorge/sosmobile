@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../services/sharedPrefs.dart';
 import '../../../widgets/app_bar.dart';
 import '../../../widgets/drawer/app_drawer.dart';
 import '../../../widgets/loading_indicator.dart';
 import '../../../helpers/enums/coursesTabs.dart';
+
+import '../../../services/providers/courses_provider.dart';
 
 import 'courses_list_view.dart';
 import '../../../models/course.dart';
@@ -22,6 +25,7 @@ class Courses extends StatefulWidget {
 }
 
 class _CoursesState extends State<Courses> {
+  List<Course> courses;
   List<Course> filteredCoursesData;
 
   // Filtering courses as All / InProgress / Completed
@@ -44,12 +48,20 @@ class _CoursesState extends State<Courses> {
 
   // Fetching Courses
   Future<bool> getCourses() async {
-    // Delay test
-    await Future<dynamic>.delayed(const Duration(milliseconds: 500));
+    print('Future<bool> getCourses() async {');
+
     // Fetching hard coded Courses data
     filteredCoursesData = await filterCourses(Course.coursesData);
 
     return true;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // to avoid fetching data with apis everytime i change the tab / better to get data here, and remove futurebuilder
+    //  await coursesProvider.updateCoursesData();
+    print('void didChangeDependencies() {');
   }
 
 // need to fix appbar caption + filter courses as per enum

@@ -28,7 +28,7 @@ Widget getLatestCourse(
             title: "Learn ReactJS Framework",
             description:
                 "Learn ReactJS Framework and Dart Programming Language",
-            imageUrl:
+            urlImage:
                 "https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg",
             totalLectures: 66,
             totalMinutes: 124,
@@ -50,7 +50,6 @@ Widget getLatestCourse(
                 urlVideo: "",
                 duration: 13,
                 courseId: 2,
-                courseName: "Learn ReactJS Framework",
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
                 isComplete: false,
@@ -62,7 +61,6 @@ Widget getLatestCourse(
                 urlVideo: "",
                 duration: 16,
                 courseId: 1,
-                courseName: "Learn React JS Framework",
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
                 isComplete: false,

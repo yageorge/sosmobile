@@ -8,10 +8,9 @@ class Lecture {
   final String urlVideo;
   final int duration;
   final int courseId;
-  final String courseName;
+  final bool isComplete; // TO BE ADDED
   final DateTime createdAt;
   final DateTime updatedAt;
-  final bool isComplete;
 
   Lecture({
     @required this.id,
@@ -20,9 +19,8 @@ class Lecture {
     @required this.urlVideo,
     @required this.duration,
     @required this.courseId,
-    @required this.courseName,
+    @required this.isComplete,
     @required this.createdAt,
     @required this.updatedAt,
-    @required this.isComplete,
   });
 }

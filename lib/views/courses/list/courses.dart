@@ -25,8 +25,10 @@ class Courses extends StatefulWidget {
 }
 
 class _CoursesState extends State<Courses> {
+  CoursesProvider _coursesProvider;
   List<Course> courses;
   List<Course> filteredCoursesData;
+  bool _initRun = true;
 
   // Filtering courses as All / InProgress / Completed
   Future<List<Course>> filterCourses(List<Course> coursesData) async {
@@ -48,25 +50,28 @@ class _CoursesState extends State<Courses> {
 
   // Fetching Courses
   Future<bool> getCourses() async {
-    print('Future<bool> getCourses() async {');
+    if (_initRun) {
+      print('Future<bool> getCourses() async {');
+      await _coursesProvider.updateCoursesData();
+      courses = _coursesProvider.getCoursesData();
 
-    // Fetching hard coded Courses data
-    filteredCoursesData = await filterCourses(Course.coursesData);
+      courses.forEach((course) {
+        print('Laravel courses: ${course.title}');
+      });
 
+      // Fetching hard coded Courses data
+      courses = Course.coursesData;
+      _initRun = false;
+    }
+    filteredCoursesData = await filterCourses(courses);
     return true;
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // to avoid fetching data with apis everytime i change the tab / better to get data here, and remove futurebuilder
-    //  await coursesProvider.updateCoursesData();
-    print('void didChangeDependencies() {');
-  }
-
-// need to fix appbar caption + filter courses as per enum
-  @override
   Widget build(BuildContext context) {
+    _coursesProvider = Provider.of<CoursesProvider>(context);
+
+    print('courses build RAN RAN');
     return Scaffold(
       drawer: AppDrawer(),
       appBar: appBar(context, 'Courses'),

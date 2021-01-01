@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Widget getCourseImage({
-  String imageUrl,
+  String urlImage,
   double ratio,
   double opacity,
 }) {
@@ -11,7 +11,7 @@ Widget getCourseImage({
     child: Opacity(
       opacity: opacity,
       child: Image.network(
-        imageUrl,
+        urlImage,
         fit: BoxFit.cover,
       ),
     ),

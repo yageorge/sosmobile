@@ -29,7 +29,7 @@ Widget getInProgressCourse(
             id: 5,
             title: "Fire Safety Phase 1 / 24 Training",
             description: "Fire Safety Training description etc etc",
-            imageUrl:
+            urlImage:
                 "https://183263-537949-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/05/Fire-safety.jpg",
             totalLectures: 6,
             totalMinutes: 28,
@@ -51,7 +51,6 @@ Widget getInProgressCourse(
                 urlVideo: "",
                 duration: 6,
                 courseId: 5,
-                courseName: "Fire Safety Training",
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
                 isComplete: false,
@@ -63,7 +62,6 @@ Widget getInProgressCourse(
                 urlVideo: "",
                 duration: 11,
                 courseId: 5,
-                courseName: "Fire Safety Training",
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
                 isComplete: false,

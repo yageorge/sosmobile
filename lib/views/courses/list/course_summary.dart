@@ -58,7 +58,7 @@ class CourseSummary extends StatelessWidget {
                 getCourseImage(
                   ratio: 3,
                   opacity: 0.9,
-                  imageUrl: course.imageUrl,
+                  urlImage: course.urlImage,
                 ),
 
                 Container(

@@ -102,7 +102,7 @@ class _LectureDetailsState extends State<LectureDetails> {
                         background: getCourseImage(
                           ratio: 5,
                           opacity: 0.9,
-                          imageUrl: course.imageUrl,
+                          urlImage: course.urlImage,
                         ),
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'dart:convert';
 import 'courseCategory.dart';
 import 'lecture.dart';
 
@@ -6,7 +7,7 @@ class Course {
   final int id;
   final String title;
   final String description;
-  final String imageUrl;
+  final String urlImage;
   final int totalLectures;
   final int totalMinutes;
   final int points;
@@ -14,14 +15,27 @@ class Course {
   final DateTime updatedAt;
   final CourseCategory category;
   final List<Lecture> lectures;
-  final bool isUserEnrolled;
-  final bool isComplete;
+  final bool isUserEnrolled; // TO BE ADDED
+  final bool isComplete; // TO BE ADDED
+
+// LARAVEL Current JSON
+  // "id": 6,
+  // "title": "Andrew Nicolas",
+  // "description": "Kayden Streich",
+  // "totalLectures": 30,
+  // "totalMinutes": 710,
+  // "points": 38,
+  // "category_id": 6,
+  // "created_at": "2020-12-20T19:28:43.000000Z",
+  // "updated_at": "2020-12-20T19:28:43.000000Z",
+  // "categoryName": "Alanna Jacobson",
+  // "laravel_through_key": 1
 
   Course({
     @required this.id,
     @required this.title,
     @required this.description,
-    @required this.imageUrl,
+    @required this.urlImage,
     @required this.totalLectures,
     @required this.totalMinutes,
     @required this.points,
@@ -33,12 +47,13 @@ class Course {
     @required this.isComplete,
   });
 
+  // Hard coded data for testing
   static List<Course> coursesData = <Course>[
     Course(
       id: 1,
       title: "Complete Course Flutter 2.2 Framework",
       description: "Learn Flutter Framework and Dart Programming Language",
-      imageUrl: "https://flutter.dev/images/catalog-widget-placeholder.png",
+      urlImage: "https://flutter.dev/images/catalog-widget-placeholder.png",
       totalLectures: 146,
       totalMinutes: 234,
       points: 76,
@@ -80,7 +95,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 18,
           courseId: 1,
-          courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: true,
@@ -93,7 +107,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "https://youtu.be/1ukSR1GRtMU",
           duration: 26,
           courseId: 1,
-          courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: true,
@@ -105,7 +118,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "https://youtu.be/bKueYVtV0eA",
           duration: 16,
           courseId: 1,
-          courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: false,
@@ -117,7 +129,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 6,
           courseId: 1,
-          courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: false,
@@ -129,7 +140,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 13,
           courseId: 1,
-          courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: true,
@@ -141,7 +151,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 6,
           courseId: 1,
-          courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: true,
@@ -153,7 +162,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 6,
           courseId: 1,
-          courseName: "Learn Flutter Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: false,
@@ -166,7 +174,7 @@ You can compare Dart's syntax to JavaScript''',
       id: 2,
       title: "Learn ReactJS Framework",
       description: "Learn ReactJS Framework and Dart Programming Language",
-      imageUrl:
+      urlImage:
           "https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg",
       totalLectures: 66,
       totalMinutes: 124,
@@ -188,7 +196,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 13,
           courseId: 2,
-          courseName: "Learn ReactJS Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: false,
@@ -200,7 +207,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 16,
           courseId: 1,
-          courseName: "Learn React JS Framework",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: false,
@@ -213,7 +219,7 @@ You can compare Dart's syntax to JavaScript''',
       id: 4,
       title: "Communicate Better",
       description: "Communicate Better description etc etc",
-      imageUrl:
+      urlImage:
           "https://zoetalentsolutions.com/wp-content/uploads/2017/04/Advanced-Communication-Skills-Training-Course.jpg",
       totalLectures: 9,
       totalMinutes: 14,
@@ -235,7 +241,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 8,
           courseId: 4,
-          courseName: "Communicate Better",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: true,
@@ -247,7 +252,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 19,
           courseId: 4,
-          courseName: "Communicate Better",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: true,
@@ -260,7 +264,7 @@ You can compare Dart's syntax to JavaScript''',
       id: 5,
       title: "Fire Safety Phase 1 / 24 Training",
       description: "Fire Safety Training description etc etc",
-      imageUrl:
+      urlImage:
           "https://183263-537949-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/05/Fire-safety.jpg",
       totalLectures: 6,
       totalMinutes: 28,
@@ -303,7 +307,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 6,
           courseId: 5,
-          courseName: "Fire Safety Training",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: false,
@@ -315,7 +318,6 @@ You can compare Dart's syntax to JavaScript''',
           urlVideo: "",
           duration: 11,
           courseId: 5,
-          courseName: "Fire Safety Training",
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
           isComplete: false,
@@ -325,4 +327,59 @@ You can compare Dart's syntax to JavaScript''',
       isComplete: false,
     ),
   ];
+}
+
+fromJson(Map<String, dynamic> jsonCourse) => Course(
+      id: jsonCourse["id"] ?? null,
+      title: jsonCourse["title"] ?? null,
+      description: jsonCourse["description"] ?? null,
+      totalLectures: jsonCourse["totalLectures"] ?? null,
+      totalMinutes: jsonCourse["totalMinutes"] ?? null,
+      points: jsonCourse["points"] ?? null,
+      createdAt: jsonCourse["created_at"] == null
+          ? null
+          : DateTime.parse(jsonCourse["created_at"]),
+      updatedAt: jsonCourse["updated_at"] == null
+          ? null
+          : DateTime.parse(jsonCourse["updated_at"]),
+      //To add the blow in laravel:
+      category: CourseCategory(
+        id: 1,
+        name: "Programming",
+        colorVal: "0xFF0277BD",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ),
+      urlImage: "jhsdjhsjdsd",
+      isComplete: true,
+      isUserEnrolled: true,
+      lectures: [
+        Lecture(
+          id: 3,
+          title: "What is React JS",
+          content: "React JS detailssssss",
+          urlVideo: "",
+          duration: 13,
+          courseId: 2,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isComplete: false,
+        ),
+        Lecture(
+          id: 4,
+          title: "Install React JS",
+          content: "Install React JS detailssssss",
+          urlVideo: "",
+          duration: 16,
+          courseId: 1,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isComplete: false,
+        ),
+      ],
+    );
+
+List<Course> jsonToCourses(String jsonData) {
+  return List<Course>.from(
+      json.decode(jsonData).map((course) => fromJson(course)));
 }

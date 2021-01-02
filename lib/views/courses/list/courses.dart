@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../services/providers/courses_provider.dart';
 import '../../../services/sharedPrefs.dart';
 import '../../../widgets/app_bar.dart';
 import '../../../widgets/drawer/app_drawer.dart';
 import '../../../widgets/loading_indicator.dart';
 import '../../../helpers/enums/coursesTabs.dart';
-
-import '../../../services/providers/courses_provider.dart';
 
 import 'courses_list_view.dart';
 import '../../../models/course.dart';
@@ -62,6 +61,9 @@ class _CoursesState extends State<Courses> {
     filteredCoursesData = await filterCourses(courses);
     return true;
   }
+
+  //TODO Notes pending: ----------------------------------------------------------------------------------
+  // Enroll button working, but need to reload all courses tab for a refresh, button wont refresh on tap
 
   @override
   Widget build(BuildContext context) {

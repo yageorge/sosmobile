@@ -21,6 +21,13 @@ class SharedPrefs {
 
   String get apiUrl => _sharedPrefs.getString("apiUrl") ?? "";
 
+  // User ID
+  set userId(int value) {
+    _sharedPrefs.setInt("userId", value);
+  }
+
+  int get userId => _sharedPrefs.getInt("userId") ?? 0;
+
   // User Token
   set userToken(String value) {
     _sharedPrefs.setString("userToken", value);

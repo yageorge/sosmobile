@@ -282,3 +282,27 @@ You can compare Dart's syntax to JavaScript''',
     completedDate: null,
   ),
 ];
+
+List<CourseCategory> categoriesList = <CourseCategory>[
+  CourseCategory(
+    id: 1,
+    name: "Programming",
+    colorVal: "0xFF64DD17",
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  ),
+  CourseCategory(
+    id: 2,
+    name: "Social skills training",
+    colorVal: "0xFF0277BD",
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  ),
+  CourseCategory(
+    id: 3,
+    name: "Safety",
+    colorVal: "0xff9c27b0",
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  ),
+];

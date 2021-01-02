@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
 
+import '../../../../services/providers/courses_provider.dart';
 import 'package:sosmobile/models/lecture.dart';
 import '../../widgets/done_checkbox.dart';
 
+Future<void> toggleIsLectureCompleted({
+  CoursesProvider coursesProvider,
+  bool value,
+  int userId,
+  int lectureId,
+}) async {
+  await coursesProvider.toggleIsLectureCompleted(
+    userId: userId,
+    lectureId: lectureId,
+    value: value,
+  );
+}
+
 Widget getLectureBody({
   BuildContext ctx,
-  int index,
+  CoursesProvider coursesProvider,
+  int userId,
+  int index, // index for lecture index in lectures (for numbers 1/7 example)
   Lecture lecture,
 }) {
   return Container(
@@ -31,9 +47,12 @@ Widget getLectureBody({
               getDoneCheckbox(
                 ctx: ctx,
                 initValue: lecture.isCompleted,
-                onChangedFn: (value) {
-                  print(value);
-                },
+                onChangedFn: (value) => toggleIsLectureCompleted(
+                  coursesProvider: coursesProvider,
+                  value: value,
+                  userId: userId,
+                  lectureId: lecture.id,
+                ),
               ),
             ],
           ),

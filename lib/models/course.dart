@@ -37,14 +37,14 @@ class Course {
 
 // Json to Course Model Data converter
 jsonToCourse(Map<String, dynamic> jsonCourse) => Course(
-      id: jsonCourse["id"] ?? null,
-      title: jsonCourse["title"] ?? null,
-      description: jsonCourse["description"] ?? null,
-      totalLectures: jsonCourse["totalLectures"] ?? null,
-      totalMinutes: jsonCourse["totalMinutes"] ?? null,
-      points: jsonCourse["points"] ?? null,
-      urlImage: jsonCourse["urlImage"] ?? null,
-      isUserEnrolled: jsonCourse["isUserEnrolled"] ?? null,
+      id: jsonCourse["id"] ?? 0,
+      title: jsonCourse["title"] ?? '',
+      description: jsonCourse["description"] ?? '',
+      totalLectures: jsonCourse["totalLectures"] ?? 0,
+      totalMinutes: jsonCourse["totalMinutes"] ?? 0,
+      points: jsonCourse["points"] ?? 0,
+      urlImage: jsonCourse["urlImage"] ?? '',
+      isUserEnrolled: jsonCourse["isUserEnrolled"] ?? false,
       completedDate: jsonCourse["completedDate"] == null
           ? null
           : DateTime.parse(jsonCourse["completedDate"]),

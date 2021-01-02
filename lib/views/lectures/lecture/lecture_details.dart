@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:provider/provider.dart';
 
+import '../../../services/providers/courses_provider.dart';
+import '../../../services/sharedPrefs.dart';
 import '../../../models/courseCategory.dart';
 import '../../../models/course.dart';
 import '../../../models/lecture.dart';
@@ -56,6 +59,8 @@ class _LectureDetailsState extends State<LectureDetails> {
 
   @override
   Widget build(BuildContext context) {
+    CoursesProvider _coursesProvider = Provider.of<CoursesProvider>(context);
+
     // Handle previous lecture tap
     void previousLecture() {
       // TODO
@@ -137,8 +142,10 @@ class _LectureDetailsState extends State<LectureDetails> {
                             // Lecture Body:
                             getLectureBody(
                               ctx: context,
+                              coursesProvider: _coursesProvider,
                               index: index,
                               lecture: lectures[index],
+                              userId: sharedPrefs.userId,
                             ),
 
                             // Video Thumbnail Button

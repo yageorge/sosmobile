@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
+import '../../../services/providers/courses_provider.dart';
+import '../../../services/sharedPrefs.dart';
 import '../../../widgets/app_bar.dart';
 import '../widgets/course_image.dart';
 import 'widgets/header.dart';
@@ -15,6 +18,7 @@ class CourseDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CoursesProvider _coursesProvider = Provider.of<CoursesProvider>(context);
     final course = ModalRoute.of(context).settings.arguments as Course;
     final category = course.category;
     final categoryColor = Color(int.parse(category.colorVal));
@@ -52,9 +56,12 @@ class CourseDetails extends StatelessWidget {
                     children: [
                       // Enroll Button
                       getEnrollButton(
-                        context,
-                        course,
+                        ctx: context,
+                        coursesProvider: _coursesProvider,
+                        course: course,
+                        userId: sharedPrefs.userId,
                       ),
+
                       // number of Lectures - minutes - points
                       getProperties(
                         context,

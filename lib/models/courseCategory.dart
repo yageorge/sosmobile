@@ -39,3 +39,16 @@ class CourseCategory {
     ),
   ];
 }
+
+// Convert Json category to CourseCategory Model
+jsonToCourseCategory(Map<String, dynamic> jsonCategory) => CourseCategory(
+      id: jsonCategory["id"] ?? null,
+      name: jsonCategory["name"] ?? null,
+      colorVal: jsonCategory["colorVal"] ?? null,
+      createdAt: jsonCategory["created_at"] == null
+          ? null
+          : DateTime.parse(jsonCategory["created_at"]),
+      updatedAt: jsonCategory["updated_at"] == null
+          ? null
+          : DateTime.parse(jsonCategory["updated_at"]),
+    );

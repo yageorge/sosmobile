@@ -17,7 +17,7 @@ class CoursesProvider with ChangeNotifier {
   Future<void> updateCoursesData() async {
     // API get call
     final response = await coursesApi.getCourses();
-
+    print('updateCoursesData() response: ${response.body}');
     // Converting response to Course
     _courses = jsonToCourses(response.body);
 

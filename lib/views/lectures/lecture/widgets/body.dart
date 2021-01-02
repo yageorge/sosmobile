@@ -30,7 +30,7 @@ Widget getLectureBody({
               // Lecture status:
               getDoneCheckbox(
                 ctx: ctx,
-                initValue: lecture.isComplete,
+                initValue: lecture.isCompleted,
                 onChangedFn: (value) {
                   print(value);
                 },

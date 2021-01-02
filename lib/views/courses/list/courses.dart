@@ -28,7 +28,7 @@ class _CoursesState extends State<Courses> {
   CoursesProvider _coursesProvider;
   List<Course> courses;
   List<Course> filteredCoursesData;
-  bool _initRun = true;
+  bool _initRun = true; // used to fetch data only on this class init
 
   // Filtering courses as All / InProgress / Completed
   Future<List<Course>> filterCourses(List<Course> coursesData) async {
@@ -52,18 +52,11 @@ class _CoursesState extends State<Courses> {
 
   // Fetching Courses
   Future<bool> getCourses() async {
+    // only fetch data on init / where _initRun == true
     if (_initRun) {
       print('Future<bool> getCourses() async {');
       await _coursesProvider.updateCoursesData();
       courses = _coursesProvider.getCoursesData();
-
-      courses.forEach((course) {
-        print('Laravel courses: ${course.title}');
-        print('Laravel courses: ${course.completedDate}');
-      });
-
-      // Fetching hard coded Courses data
-      courses = Course.coursesData;
       _initRun = false;
     }
     filteredCoursesData = await filterCourses(courses);

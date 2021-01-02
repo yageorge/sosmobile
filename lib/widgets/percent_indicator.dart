@@ -29,7 +29,7 @@ Map<String, Object> calculateValues(List<Lecture> lectures) {
   int completedLectures = 0;
 
   lectures.forEach((lecture) {
-    if (lecture.isComplete) completedLectures++;
+    if (lecture.isCompleted) completedLectures++;
   });
 
   percent =

@@ -52,7 +52,7 @@ Widget getLatestCourse(
                 courseId: 2,
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
-                isComplete: false,
+                isCompleted: false,
               ),
               Lecture(
                 id: 4,
@@ -63,7 +63,7 @@ Widget getLatestCourse(
                 courseId: 1,
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
-                isComplete: false,
+                isCompleted: false,
               ),
             ],
             isUserEnrolled: true,

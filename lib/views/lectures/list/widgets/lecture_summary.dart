@@ -97,7 +97,7 @@ class LectureSummary extends StatelessWidget {
             ),
 
             // Lecture Status
-            if (_lecture.isComplete)
+            if (_lecture.isCompleted)
               Padding(
                 padding: const EdgeInsets.only(left: 2.0),
                 child: Icon(

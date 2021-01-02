@@ -53,7 +53,7 @@ Widget getInProgressCourse(
                 courseId: 5,
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
-                isComplete: false,
+                isCompleted: false,
               ),
               Lecture(
                 id: 8,
@@ -64,7 +64,7 @@ Widget getInProgressCourse(
                 courseId: 5,
                 createdAt: DateTime.now(),
                 updatedAt: DateTime.now(),
-                isComplete: false,
+                isCompleted: false,
               ),
             ],
             isUserEnrolled: false,

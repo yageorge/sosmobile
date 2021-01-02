@@ -8,7 +8,7 @@ class Lecture {
   final String urlVideo;
   final int duration;
   final int courseId;
-  final bool isComplete;
+  final bool isCompleted;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -19,8 +19,25 @@ class Lecture {
     @required this.urlVideo,
     @required this.duration,
     @required this.courseId,
-    @required this.isComplete,
+    @required this.isCompleted,
     @required this.createdAt,
     @required this.updatedAt,
   });
 }
+
+// Convert Json lecture to Lecture Model
+jsonToLecture(Map<String, dynamic> jsonLecture) => Lecture(
+      id: jsonLecture["id"] ?? null,
+      title: jsonLecture["title"] ?? null,
+      content: jsonLecture["content"] ?? null,
+      urlVideo: jsonLecture["urlVideo"] ?? null,
+      duration: jsonLecture["duration"] ?? null,
+      courseId: jsonLecture["course_id"] ?? null,
+      createdAt: jsonLecture["created_at"] == null
+          ? null
+          : DateTime.parse(jsonLecture["created_at"]),
+      updatedAt: jsonLecture["updated_at"] == null
+          ? null
+          : DateTime.parse(jsonLecture["updated_at"]),
+      isCompleted: jsonLecture["isCompleted"] ?? null,
+    );

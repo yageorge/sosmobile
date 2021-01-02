@@ -15,8 +15,8 @@ class Course {
   final DateTime updatedAt;
   final CourseCategory category;
   final List<Lecture> lectures;
-  final bool isUserEnrolled; // TO BE ADDED
-  final bool isComplete; // TO BE ADDED
+  final bool isUserEnrolled;
+  final DateTime completedDate;
 
 // LARAVEL Current JSON
   // "id": 6,
@@ -44,7 +44,7 @@ class Course {
     @required this.category,
     @required this.lectures,
     @required this.isUserEnrolled,
-    @required this.isComplete,
+    @required this.completedDate,
   });
 
   // Hard coded data for testing
@@ -168,7 +168,7 @@ You can compare Dart's syntax to JavaScript''',
         ),
       ],
       isUserEnrolled: true,
-      isComplete: false,
+      completedDate: null,
     ),
     Course(
       id: 2,
@@ -213,7 +213,7 @@ You can compare Dart's syntax to JavaScript''',
         ),
       ],
       isUserEnrolled: true,
-      isComplete: false,
+      completedDate: null,
     ),
     Course(
       id: 4,
@@ -258,7 +258,7 @@ You can compare Dart's syntax to JavaScript''',
         ),
       ],
       isUserEnrolled: true,
-      isComplete: true,
+      completedDate: null,
     ),
     Course(
       id: 5,
@@ -324,7 +324,7 @@ You can compare Dart's syntax to JavaScript''',
         ),
       ],
       isUserEnrolled: false,
-      isComplete: false,
+      completedDate: null,
     ),
   ];
 }
@@ -351,7 +351,9 @@ fromJson(Map<String, dynamic> jsonCourse) => Course(
         updatedAt: DateTime.now(),
       ),
       urlImage: "jhsdjhsjdsd",
-      isComplete: true,
+      completedDate: jsonCourse["completedDate"] == null
+          ? null
+          : DateTime.parse(jsonCourse["completedDate"]),
       isUserEnrolled: true,
       lectures: [
         Lecture(

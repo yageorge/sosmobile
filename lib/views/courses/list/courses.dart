@@ -37,12 +37,14 @@ class _CoursesState extends State<Courses> {
     if (widget.coursesTab == coursesTabs.inProgress) {
       // Filtering for In Progress courses only
       _filteredCoursesData = coursesData
-          .where((Course course) => course.isUserEnrolled && !course.isComplete)
+          .where((Course course) =>
+              course.isUserEnrolled && course.completedDate == null)
           .toList();
     } else if (widget.coursesTab == coursesTabs.completed) {
       // Filtering for completed courses only
-      _filteredCoursesData =
-          coursesData.where((Course course) => course.isComplete).toList();
+      _filteredCoursesData = coursesData
+          .where((Course course) => course.completedDate != null)
+          .toList();
     }
 
     return _filteredCoursesData;
@@ -57,6 +59,7 @@ class _CoursesState extends State<Courses> {
 
       courses.forEach((course) {
         print('Laravel courses: ${course.title}');
+        print('Laravel courses: ${course.completedDate}');
       });
 
       // Fetching hard coded Courses data

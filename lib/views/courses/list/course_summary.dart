@@ -98,7 +98,7 @@ class CourseSummary extends StatelessWidget {
             if (course.isUserEnrolled)
               status(
                 ctx: context,
-                isComplete: course.isComplete,
+                isComplete: course.completedDate != null,
               ),
           ]),
         ),

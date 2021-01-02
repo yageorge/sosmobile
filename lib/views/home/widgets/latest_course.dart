@@ -67,7 +67,7 @@ Widget getLatestCourse(
               ),
             ],
             isUserEnrolled: true,
-            isComplete: false,
+            completedDate: null,
           ),
         ),
       ],

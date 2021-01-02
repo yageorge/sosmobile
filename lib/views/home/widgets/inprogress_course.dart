@@ -68,7 +68,7 @@ Widget getInProgressCourse(
               ),
             ],
             isUserEnrolled: false,
-            isComplete: false,
+            completedDate: null,
           ),
         ),
       ],

@@ -5,7 +5,7 @@ import '../sharedPrefs.dart';
 import '../../models/course.dart';
 
 class CoursesApi {
-  final String url = "${sharedPrefs.apiUrl}courses";
+  final String url = "${sharedPrefs.apiUrl}usercourses";
   final String token = sharedPrefs.userToken;
   // Future<List<Course>>
   Future getCourses() async {

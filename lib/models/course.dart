@@ -15,7 +15,7 @@ class Course {
   final DateTime updatedAt;
   final CourseCategory category;
   final List<Lecture> lectures;
-  final bool isUserEnrolled;
+  bool isUserEnrolled;
   final DateTime completedDate;
 
   Course({

@@ -4,29 +4,12 @@ import '../../../../services/providers/courses_provider.dart';
 import 'package:sosmobile/models/lecture.dart';
 import '../../widgets/done_checkbox.dart';
 
-Future<void> toggleIsLectureCompleted({
-  CoursesProvider coursesProvider,
-  bool value,
-  int userId,
-  int courseId,
-  int lectureId,
-  Function callBack,
-}) async {
-  await coursesProvider.toggleIsLectureCompleted(
-    userId: userId,
-    courseId: courseId,
-    lectureId: lectureId,
-    value: value,
-  );
-  callBack();
-}
-
+// Render Lecture Body Title - isDone - status - content
 Widget getLectureBody({
   BuildContext ctx,
   CoursesProvider coursesProvider,
   int userId,
-  int index, // index for lecture index in lectures (for numbers 1/7 example)
-  int courseId,
+  int index,
   Lecture lecture,
   Function callBack,
 }) {
@@ -57,8 +40,7 @@ Widget getLectureBody({
                   coursesProvider: coursesProvider,
                   value: value,
                   userId: userId,
-                  courseId: courseId,
-                  lectureId: lecture.id,
+                  lecture: lecture,
                   callBack: callBack,
                 ),
               ),
@@ -71,4 +53,21 @@ Widget getLectureBody({
       ],
     ),
   );
+}
+
+// Calling toggle handler + calling callBack function
+Future<void> toggleIsLectureCompleted({
+  CoursesProvider coursesProvider,
+  int userId,
+  Lecture lecture,
+  bool value,
+  Function callBack,
+}) async {
+  await coursesProvider.toggleIsLectureCompleted(
+    userId: userId,
+    lecture: lecture,
+    value: value,
+  );
+  // Running callBack function setState
+  callBack();
 }

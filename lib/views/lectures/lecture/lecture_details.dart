@@ -146,8 +146,8 @@ class _LectureDetailsState extends State<LectureDetails> {
                                 index: index,
                                 lecture: lectures[index],
                                 userId: sharedPrefs.userId,
-                                courseId: course.id,
                                 callBack: () {
+                                  // setState to refresh the isComplete boolean
                                   setState(() {
                                     print('setState RAN RAN RAN');
                                   });

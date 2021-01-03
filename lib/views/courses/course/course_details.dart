@@ -13,9 +13,14 @@ import 'widgets/enroll_button.dart';
 import '../../../models/course.dart';
 import '../../lectures/list/lectures.dart';
 
-class CourseDetails extends StatelessWidget {
+class CourseDetails extends StatefulWidget {
   static const routeName = '/course-details';
 
+  @override
+  _CourseDetailsState createState() => _CourseDetailsState();
+}
+
+class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
     CoursesProvider _coursesProvider = Provider.of<CoursesProvider>(context);
@@ -56,11 +61,16 @@ class CourseDetails extends StatelessWidget {
                     children: [
                       // Enroll Button
                       getEnrollButton(
-                        ctx: context,
-                        coursesProvider: _coursesProvider,
-                        course: course,
-                        userId: sharedPrefs.userId,
-                      ),
+                          ctx: context,
+                          coursesProvider: _coursesProvider,
+                          course: course,
+                          userId: sharedPrefs.userId,
+                          callBack: () {
+                            // setState to refresh the isComplete boolean
+                            setState(() {
+                              print('setState RAN RAN RAN');
+                            });
+                          }),
 
                       // number of Lectures - minutes - points
                       getProperties(

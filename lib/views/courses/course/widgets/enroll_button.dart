@@ -7,12 +7,14 @@ import '../../../../services/sharedPrefs.dart';
 Future<void> enrollUserToCourse({
   CoursesProvider coursesProvider,
   int userId,
-  int courseId,
+  Course course,
+  Function callBack,
 }) async {
   await coursesProvider.enrollUserToCourse(
     userId: userId,
-    courseId: courseId,
+    course: course,
   );
+  callBack();
 }
 
 // Enroll Button / Already Enrolled
@@ -21,6 +23,7 @@ Widget getEnrollButton({
   CoursesProvider coursesProvider,
   Course course,
   int userId,
+  Function callBack,
 }) {
   return InkWell(
     child: Container(
@@ -47,7 +50,8 @@ Widget getEnrollButton({
         : () => enrollUserToCourse(
               coursesProvider: coursesProvider,
               userId: userId,
-              courseId: course.id,
+              course: course,
+              callBack: callBack,
             ),
   );
 }

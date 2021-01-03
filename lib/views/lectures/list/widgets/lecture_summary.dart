@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sosmobile/services/sharedPrefs.dart';
+import '../../../../widgets/alert_modal.dart';
 
 import '../../lecture/lecture_details.dart';
 import '../../../../models/lecture.dart';
@@ -21,8 +21,8 @@ class LectureSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Lecture tap => navigate to Lecture details
-    onLectureTap(
+    // navigate to Lecture details
+    navigateToLecture(
       List<Lecture> lectures,
       int indexLecture,
     ) {
@@ -35,6 +35,26 @@ class LectureSummary extends StatelessWidget {
           'index': indexLecture
         },
       );
+    }
+
+    // Lecture tap => check if User Enrolled to course + navigate to Lecture details
+    onLectureTap(
+      Course course,
+      List<Lecture> lectures,
+      int indexLecture,
+    ) {
+      // Check if course is enrolled
+      if (course.isUserEnrolled) {
+        navigateToLecture(lectures, indexLecture);
+      } else {
+        // if user is not enrolled: Show alert
+        getAlertModal(
+          ctx: context,
+          isQuestion: false,
+          title: 'You are not enrolled!',
+          message: 'Please enroll first to access the content.',
+        );
+      }
     }
 
     // Saving the current lecture + category color
@@ -108,7 +128,7 @@ class LectureSummary extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () => onLectureTap(lectures, index),
+      onTap: () => onLectureTap(course, lectures, index),
     );
   }
 }

@@ -29,13 +29,17 @@ class CoursesProvider with ChangeNotifier {
   // Enroll current user to a course
   Future<void> enrollUserToCourse({
     int userId,
-    int courseId,
+    Course course,
   }) async {
     // API call
-    final response = await coursesApi.enrollToCourse(userId, courseId);
+    final response = await coursesApi.enrollToCourse(userId, course.id);
 
     // on success
     if (response['success'] != null) {
+      // update course isUserEnrolled locally:
+      course.isUserEnrolled = true;
+
+      // Update all courses - to render updated data in app
       await updateCoursesData();
     } else if (response['error'] != null) {
       // manage this error to user
@@ -46,28 +50,20 @@ class CoursesProvider with ChangeNotifier {
   // Set Lecture isCompleted by current user
   Future<void> toggleIsLectureCompleted({
     int userId,
-    int courseId,
-    int lectureId,
+    Lecture lecture,
     bool value,
   }) async {
     // API call
     final response =
-        await coursesApi.toggleIsLectureCompleted(userId, lectureId, value);
+        await coursesApi.toggleIsLectureCompleted(userId, lecture.id, value);
 
     // on success
     if (response['success'] != null) {
-      // Maybe no need to updateCoursesData(); and leave it to complete refresh/fetch
-      // await updateCoursesData();
-      //TODO update bool value in Flutter models:
-      Course course = _courses.firstWhere((course) => course.id == courseId);
-      List<Lecture> lectures = course.lectures;
-      Lecture lecture =
-          lectures.firstWhere((lecture) => lecture.id == lectureId);
-      print('lecture toupdate: ${lecture.isCompleted}');
+      // update related lecture locally:
       lecture.isCompleted = value;
-      print('lecture UPDATED: ${lecture.isCompleted}');
-// ABOVE IS WORKING - MODIFY TO MOVE IT MAYBE TO LECTURE MODEL LOGIC
 
+      // Update all courses - to render updated data in app
+      await updateCoursesData();
     } else if (response['error'] != null) {
       // manage this error to user
       print('A problem occurred whith toggleIsLectureCompleted');

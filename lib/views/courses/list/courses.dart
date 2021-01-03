@@ -44,6 +44,7 @@ class _CoursesState extends State<Courses> {
       _filteredCoursesData = coursesData
           .where((Course course) => course.completedDate != null)
           .toList();
+      print('completed tab_filteredCoursesData : $_filteredCoursesData');
     }
 
     return _filteredCoursesData;

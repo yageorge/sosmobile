@@ -141,12 +141,17 @@ class _LectureDetailsState extends State<LectureDetails> {
 
                             // Lecture Body:
                             getLectureBody(
-                              ctx: context,
-                              coursesProvider: _coursesProvider,
-                              index: index,
-                              lecture: lectures[index],
-                              userId: sharedPrefs.userId,
-                            ),
+                                ctx: context,
+                                coursesProvider: _coursesProvider,
+                                index: index,
+                                lecture: lectures[index],
+                                userId: sharedPrefs.userId,
+                                courseId: course.id,
+                                callBack: () {
+                                  setState(() {
+                                    print('setState RAN RAN RAN');
+                                  });
+                                }),
 
                             // Video Thumbnail Button
                             if (lectures[index].urlVideo.isNotEmpty)

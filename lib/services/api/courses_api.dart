@@ -77,14 +77,13 @@ class CoursesApi {
           headers: {'Authorization': token},
         );
       }
-
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
         throw 'A problem occurred: ${response.reasonPhrase}';
       }
     } catch (e) {
-      throw 'Catch error setLectureAsCompleted() $e';
+      throw 'Catch error toggleIsLectureCompleted() $e';
     }
   }
 }

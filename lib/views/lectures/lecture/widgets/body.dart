@@ -8,13 +8,17 @@ Future<void> toggleIsLectureCompleted({
   CoursesProvider coursesProvider,
   bool value,
   int userId,
+  int courseId,
   int lectureId,
+  Function callBack,
 }) async {
   await coursesProvider.toggleIsLectureCompleted(
     userId: userId,
+    courseId: courseId,
     lectureId: lectureId,
     value: value,
   );
+  callBack();
 }
 
 Widget getLectureBody({
@@ -22,7 +26,9 @@ Widget getLectureBody({
   CoursesProvider coursesProvider,
   int userId,
   int index, // index for lecture index in lectures (for numbers 1/7 example)
+  int courseId,
   Lecture lecture,
+  Function callBack,
 }) {
   return Container(
     padding: const EdgeInsets.only(bottom: 12.0),
@@ -51,7 +57,9 @@ Widget getLectureBody({
                   coursesProvider: coursesProvider,
                   value: value,
                   userId: userId,
+                  courseId: courseId,
                   lectureId: lecture.id,
+                  callBack: callBack,
                 ),
               ),
             ],

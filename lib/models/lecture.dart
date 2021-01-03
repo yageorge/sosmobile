@@ -8,7 +8,7 @@ class Lecture {
   final String urlVideo;
   final int duration;
   final int courseId;
-  final bool isCompleted;
+  bool isCompleted;
   final DateTime createdAt;
   final DateTime updatedAt;
 

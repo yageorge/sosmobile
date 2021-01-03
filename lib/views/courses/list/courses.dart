@@ -55,7 +55,7 @@ class _CoursesState extends State<Courses> {
     if (_initRun) {
       print('Future<bool> getCourses() async {');
       await _coursesProvider.updateCoursesData();
-      courses = _coursesProvider.getCoursesData();
+      courses = _coursesProvider.coursesData;
       _initRun = false;
     }
     filteredCoursesData = await filterCourses(courses);
@@ -64,6 +64,7 @@ class _CoursesState extends State<Courses> {
 
   //TODO Notes pending: ----------------------------------------------------------------------------------
   // Enroll button working, but need to reload all courses tab for a refresh, button wont refresh on tap
+  // add Pull to refresh option
 
   @override
   Widget build(BuildContext context) {

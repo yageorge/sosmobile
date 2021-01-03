@@ -26,66 +26,76 @@ class Courses extends StatefulWidget {
 class _CoursesState extends State<Courses> {
   CoursesProvider _coursesProvider;
   List<Course> courses;
-  List<Course> filteredCoursesData;
+  List<Course> filteredCourses;
   bool _initRun = true; // used to fetch data only on this class init
 
   // Filtering courses as All / InProgress / Completed
   Future<List<Course>> filterCourses(List<Course> coursesData) async {
-    List<Course> _filteredCoursesData = coursesData;
+    List<Course> _filteredCourses = coursesData;
 
     if (widget.coursesTab == coursesTabs.inProgress) {
       // Filtering for In Progress courses only
-      _filteredCoursesData = coursesData
+      _filteredCourses = coursesData
           .where((Course course) =>
               course.isUserEnrolled && course.completedDate == null)
           .toList();
     } else if (widget.coursesTab == coursesTabs.completed) {
       // Filtering for completed courses only
-      _filteredCoursesData = coursesData
+      _filteredCourses = coursesData
           .where((Course course) => course.completedDate != null)
           .toList();
-      print('completed tab_filteredCoursesData : $_filteredCoursesData');
+      print('completed tab_filteredCourses : $_filteredCourses');
     }
 
-    return _filteredCoursesData;
+    return _filteredCourses;
   }
 
   // Fetching Courses
-  Future<bool> getCourses() async {
+  Future<void> getCourses() async {
     // only fetch data on init / where _initRun == true
     if (_initRun) {
-      print('Future<bool> getCourses() async {');
+      print('getCourses() async   if (_initRun) {');
       await _coursesProvider.updateCoursesData();
       courses = _coursesProvider.coursesData;
       _initRun = false;
     }
-    filteredCoursesData = await filterCourses(courses);
+    filteredCourses = await filterCourses(courses);
     return true;
   }
 
+  // pullRefresh
+  Future<void> pullRefresh() async {
+    // Setting _initRun true for getCourses to refresh courses
+    _initRun = true;
+    await getCourses();
+  }
+
   //TODO Notes pending: ----------------------------------------------------------------------------------
-  // Enroll button working, but need to reload all courses tab for a refresh, button wont refresh on tap
-  // add Pull to refresh option
 
   @override
   Widget build(BuildContext context) {
     _coursesProvider = Provider.of<CoursesProvider>(context);
 
-    print('courses build RAN RAN');
     return Scaffold(
       drawer: AppDrawer(),
       appBar: appBar(context, 'Courses'),
-      body: FutureBuilder<bool>(
+      body: FutureBuilder(
         future: getCourses(),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return loadingIndicator(
               ctx: context,
               deviceHeight: sharedPrefs.deviceHeight,
             );
           } else {
-            return CoursesListView(
-              coursesData: filteredCoursesData,
+            // Pull down on screen to refresh Data indicator
+            return RefreshIndicator(
+              onRefresh: () => pullRefresh(),
+              backgroundColor: Theme.of(context).primaryColor,
+              color: Theme.of(context).accentColor,
+              child: CoursesListView(
+                coursesData: filteredCourses,
+              ),
             );
           }
         },

@@ -13,16 +13,11 @@ class UserProfile extends StatelessWidget {
       drawer: AppDrawer(),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Column(
               children: [
                 userHeader(context),
-                Text('Some other info about the user OR company'),
-                Text(
-                    'Statistics about NBRE of completed courses / Points obtained ...'),
-                Text('some settings'),
-                Text('Link to change Password'),
               ],
             ),
           ],

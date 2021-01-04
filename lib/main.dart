@@ -8,6 +8,7 @@ import './core/routes.dart';
 import './services/sharedPrefs.dart';
 import './services/app_router.dart';
 
+import './services/providers/auth_provider.dart';
 import './services/providers/courses_provider.dart';
 
 void main() async {
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<AuthProvider>(
+          create: (context) => AuthProvider(),
+        ),
         ChangeNotifierProvider<CoursesProvider>(
           create: (context) => CoursesProvider(),
         ),

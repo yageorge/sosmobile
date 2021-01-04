@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/images/main_background.dart';
+import '../../services/providers/auth_provider.dart';
+
 import 'widgets/footer_logo.dart';
 import 'widgets/auth_form.dart';
 
@@ -16,14 +19,18 @@ class _AuthState extends State<Auth> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider _authProvider = Provider.of<AuthProvider>(context);
+
     //function to get all data from auth_form.dart as parameters + Sign in user
     void _submitAuthForm(
       String email,
       String password,
       BuildContext ctx,
     ) async {
-      print('email: ' + email);
-      print('password: ' + password);
+      await _authProvider.loginUser(
+        email: email,
+        password: password,
+      );
     }
 
     return Scaffold(

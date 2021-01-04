@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../widgets/company/company_logo.dart';
 
-Widget footerLogo(BuildContext ctx) {
+Widget getFooterLogo(BuildContext ctx) {
   return ClipRRect(
     borderRadius: BorderRadius.only(
       bottomRight: Radius.circular(86),

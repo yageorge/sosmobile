@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 import '../../widgets/images/main_background.dart';
 import '../../services/providers/auth_provider.dart';
+import '../../services/app_router.dart';
 
 import 'widgets/footer_logo.dart';
 import 'widgets/auth_form.dart';
+import 'widgets/error_message.dart';
 
 class Auth extends StatefulWidget {
   static const routeName = '/auth';
@@ -27,10 +30,35 @@ class _AuthState extends State<Auth> {
       String password,
       BuildContext ctx,
     ) async {
-      await _authProvider.loginUser(
-        email: email,
-        password: password,
-      );
+      setState(() {
+        _isLoading = true;
+      });
+
+      try {
+        // Hand user login
+        final String _response = await _authProvider.loginUser(
+          email: email,
+          password: password,
+        );
+
+        // On success login, navigate to Home view:
+        if (_response == "success") {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => AppRouter()),
+            // To remove all the routes below the pushed route
+            (r) => false,
+          );
+        }
+      } catch (e) {
+        setState(() {
+          errorMessage = e;
+        });
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
 
     return Scaffold(
@@ -47,8 +75,15 @@ class _AuthState extends State<Auth> {
               children: <Widget>[
                 AuthForm(_submitAuthForm, _isLoading),
 
+                //Error msg:
+                if (errorMessage.isNotEmpty)
+                  getErrorMessage(
+                    ctx: context,
+                    errorMessage: errorMessage,
+                  ),
+
                 // Fooyer logo
-                footerLogo(context),
+                getFooterLogo(context),
               ],
             ),
           ),

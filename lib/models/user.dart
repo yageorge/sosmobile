@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+
+import './department.dart';
 
 class User {
   final int id;
@@ -7,8 +8,7 @@ class User {
   final String lastName;
   final String email;
   final int pointsTarget;
-  final int departmentId;
-  final String departmentName;
+  final Department department;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -18,21 +18,29 @@ class User {
     @required this.lastName,
     @required this.email,
     @required this.pointsTarget,
-    @required this.departmentId,
-    @required this.departmentName,
+    @required this.department,
     @required this.createdAt,
     @required this.updatedAt,
   });
-
-  static User user = User(
-    id: 1,
-    firstName: "George",
-    lastName: "Yaacoub",
-    email: "gyaacoub@gmail.com",
-    pointsTarget: 28,
-    departmentId: 1,
-    departmentName: "Software Developers",
-    createdAt: DateTime.now(),
-    updatedAt: DateTime.now(),
-  );
 }
+
+// Json to User Model Data converter
+jsonToUser({
+  Map<String, dynamic> jsonUser,
+  Map<String, dynamic> jsonDepartment,
+}) =>
+    User(
+      id: jsonUser["id"] ?? 0,
+      firstName: jsonUser["firstName"] ?? '',
+      lastName: jsonUser["lastName"] ?? '',
+      email: jsonUser["email"] ?? '',
+      pointsTarget: jsonUser["pointsTarget"] ?? 0,
+      createdAt: jsonUser["created_at"] == null
+          ? null
+          : DateTime.parse(jsonUser["created_at"]),
+      updatedAt: jsonUser["updated_at"] == null
+          ? null
+          : DateTime.parse(jsonUser["updated_at"]),
+      department:
+          jsonDepartment == null ? null : jsonToDepartment(jsonDepartment),
+    );

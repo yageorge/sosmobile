@@ -9,7 +9,7 @@ class CoursesProvider with ChangeNotifier {
 
   List<Course> _courses = [];
 
-  //sending history Scores
+  // Get all courses
   List<Course> get coursesData {
     return [..._courses];
   }

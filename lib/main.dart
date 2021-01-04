@@ -9,6 +9,7 @@ import './services/sharedPrefs.dart';
 import './services/app_router.dart';
 
 import './services/providers/auth_provider.dart';
+import './services/providers/user_provider.dart';
 import './services/providers/courses_provider.dart';
 
 void main() async {
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<AuthProvider>(
           create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (context) => UserProvider(),
         ),
         ChangeNotifierProvider<CoursesProvider>(
           create: (context) => CoursesProvider(),

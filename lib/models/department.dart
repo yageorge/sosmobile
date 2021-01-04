@@ -12,11 +12,16 @@ class Department {
     @required this.createdAt,
     @required this.updatedAt,
   });
-
-  static Department department = Department(
-    id: 1,
-    name: "Software Developers",
-    createdAt: DateTime.now(),
-    updatedAt: DateTime.now(),
-  );
 }
+
+// Convert Json department to Department Model
+jsonToDepartment(Map<String, dynamic> jsonDepartment) => Department(
+      id: jsonDepartment["id"] ?? 0,
+      name: jsonDepartment["name"] ?? '',
+      createdAt: jsonDepartment["created_at"] == null
+          ? null
+          : DateTime.parse(jsonDepartment["created_at"]),
+      updatedAt: jsonDepartment["updated_at"] == null
+          ? null
+          : DateTime.parse(jsonDepartment["updated_at"]),
+    );

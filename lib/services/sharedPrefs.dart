@@ -28,13 +28,6 @@ class SharedPrefs {
 
   int get userId => _sharedPrefs.getInt("userId") ?? 0;
 
-  // User Token
-  set userToken(String value) {
-    _sharedPrefs.setString("userToken", value);
-  }
-
-  String get userToken => _sharedPrefs.getString("userToken") ?? "";
-
   // Device Width
   set deviceWidth(double value) {
     _sharedPrefs.setDouble("deviceWidth", value);

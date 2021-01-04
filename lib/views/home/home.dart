@@ -23,6 +23,7 @@ class Home extends StatelessWidget {
 
     // Fetching Courses
     Future<void> getCourses() async {
+      print(' Future<void> getCourses() async {');
       await _coursesProvider.updateCoursesData();
       _courses = _coursesProvider.coursesData;
       return true;

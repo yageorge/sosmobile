@@ -23,8 +23,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.12.2
+  intl: ^0.16.1 #to handle dates
+  provider: ^4.3.2+3
+  flutter_secure_storage: ^3.3.5 #Storing sensitive data like tokens
+  shared_preferences: ^0.5.12+4 #Storing data
   email_validator: ^1.0.6
-  introduction_screen: ^1.0.9 # unused yet - USE THIS Important!!
+  introduction_screen: ^1.0.9
+  youtube_player_flutter: ^7.0.0+7
+  percent_indicator: ^2.1.9
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,5 +53,5 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets: #sub-folders are unread, include each folder separately
-    - assets/images/
     - assets/images/app/
+    - assets/images/users/

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import './widgets/build_screen.dart';
 import '../auth/auth.dart';
 
 class Intro extends StatefulWidget {
@@ -19,86 +20,68 @@ class _IntroState extends State<Intro> {
     );
   }
 
-  // Image config build
-  Widget _buildImage(String assetName) {
-    return Align(
-      child: Image.asset('assets/images/app/$assetName.jpg', width: 350.0),
-      alignment: Alignment.bottomCenter,
-    );
-  }
-
-  // Screen model view
-  PageViewModel _buildScreen(
-    PageDecoration pageDecoration,
-    String title,
-    String body,
-    String imageName,
-  ) {
-    return PageViewModel(
-      title: title,
-      body: body,
-      image: _buildImage(imageName),
-      decoration: pageDecoration,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // Style and design
-    const bodyStyle = TextStyle(fontSize: 19.0);
+    const bodyStyle = TextStyle(fontSize: 16.0);
     const pageDecoration = const PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
+      titleTextStyle: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.teal,
+      pageColor: Color(0xFFFFFF),
       imagePadding: EdgeInsets.zero,
     );
 
     return IntroductionScreen(
       key: introKey,
       pages: [
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen One Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_1',
+          'Skill Optimizer',
+          'A digital learning platform, every company Needs!',
+          'intro_1.png',
         ),
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen Two Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_2',
+          'Create Customized Material!',
+          'Create and allocate internal crafted training modules and courses',
+          'intro_2.png',
         ),
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen Three Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_3',
+          'Completed Modules Linked to KPIs',
+          'Set Points to courses and trainings, and use them to generate KPIs',
+          'intro_3.jpg',
         ),
-        _buildScreen(
+        buildScreen(
           pageDecoration,
-          'Screen Four Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_4',
-        ),
-        _buildScreen(
-          pageDecoration,
-          'Screen Five Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
-          'intro_5',
+          'On-The-Go Access!',
+          'Employees can access their training modules and courses on-the-go. IOS / Android apps',
+          'intro_4.png',
         ),
       ],
       onDone: () => _onIntroEnd(context),
-      //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: const Text('Skip'),
-      next: const Icon(Icons.arrow_forward),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
+      skip: const Text(
+        'Skip',
+        style: TextStyle(color: Colors.teal),
+      ),
+      next: const Icon(
+        Icons.arrow_forward,
+        color: Colors.teal,
+      ),
+      done: const Text('Done',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.teal,
+          )),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Color(0xFFBDBDBD),
+        activeColor: Colors.teal,
         activeSize: Size(22.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),

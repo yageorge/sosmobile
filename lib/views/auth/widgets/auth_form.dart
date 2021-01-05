@@ -96,7 +96,6 @@ class _AuthFormState extends State<AuthForm> {
                   key: ValueKey('password'),
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    //TODO convert IconButton to InkWell used other screens, to fix X wrong alignment
                     suffixIcon: IconButton(
                       icon: Icon(
                         // Based on passwordVisible state choose the icon

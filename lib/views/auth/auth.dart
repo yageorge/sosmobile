@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../components/main_background.dart';
-import 'components/footer_logo.dart';
-import 'components/auth_form.dart';
+import '../../widgets/images/main_background.dart';
+import '../../services/providers/auth_provider.dart';
+import '../../services/app_router.dart';
+
+import 'widgets/footer_logo.dart';
+import 'widgets/auth_form.dart';
+import 'widgets/error_message.dart';
 
 class Auth extends StatefulWidget {
+  static const routeName = '/auth';
   @override
   _AuthState createState() => _AuthState();
 }
@@ -15,14 +21,43 @@ class _AuthState extends State<Auth> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider _authProvider = Provider.of<AuthProvider>(context);
+
     //function to get all data from auth_form.dart as parameters + Sign in user
     void _submitAuthForm(
       String email,
       String password,
       BuildContext ctx,
     ) async {
-      print('email: ' + email);
-      print('password: ' + password);
+      setState(() {
+        _isLoading = true;
+      });
+
+      try {
+        // Hand user login
+        final String _response = await _authProvider.loginUser(
+          email: email,
+          password: password,
+        );
+
+        // On success login, navigate to Home view:
+        if (_response == "success") {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => AppRouter()),
+            // To remove all the routes below the pushed route
+            (r) => false,
+          );
+        }
+      } catch (e) {
+        setState(() {
+          errorMessage = e;
+        });
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
 
     return Scaffold(
@@ -39,8 +74,15 @@ class _AuthState extends State<Auth> {
               children: <Widget>[
                 AuthForm(_submitAuthForm, _isLoading),
 
+                //Error msg:
+                if (errorMessage.isNotEmpty)
+                  getErrorMessage(
+                    ctx: context,
+                    errorMessage: errorMessage,
+                  ),
+
                 // Fooyer logo
-                footerLogo(context),
+                getFooterLogo(context),
               ],
             ),
           ),

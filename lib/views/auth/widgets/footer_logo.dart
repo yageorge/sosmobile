@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-Widget footerLogo(BuildContext ctx) {
+import '../../../widgets/company/company_logo.dart';
+
+Widget getFooterLogo(BuildContext ctx) {
   return ClipRRect(
     borderRadius: BorderRadius.only(
       bottomRight: Radius.circular(86),
@@ -15,11 +17,9 @@ Widget footerLogo(BuildContext ctx) {
         color: Theme.of(ctx).primaryColor,
       ),
       padding: EdgeInsets.all(4),
-      child: Image.asset(
-        'assets/images/app/sos_logo.png',
+      child: companyLogo(
         height: 44,
         width: 44,
-        fit: BoxFit.fitHeight,
       ),
     ),
   );

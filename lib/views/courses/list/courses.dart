@@ -68,7 +68,7 @@ class _CoursesState extends State<Courses> {
     await getCourses();
   }
 
-  //TODO Notes pending: --------------------------------------------------------------------------------
+  //TODO Notes pending: ---------------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {

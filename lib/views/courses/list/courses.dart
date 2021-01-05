@@ -53,7 +53,6 @@ class _CoursesState extends State<Courses> {
   Future<void> getCourses() async {
     // only fetch data on init / where _initRun == true
     if (_initRun) {
-      print('getCourses() async   if (_initRun) {');
       await _coursesProvider.updateCoursesData();
       courses = _coursesProvider.coursesData;
       _initRun = false;

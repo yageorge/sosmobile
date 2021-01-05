@@ -41,6 +41,7 @@ Widget getLectureBody({
                   value: value,
                   userId: userId,
                   lecture: lecture,
+                  lectureIndex: index,
                   callBack: callBack,
                 ),
               ),
@@ -60,6 +61,7 @@ Future<void> toggleIsLectureCompleted({
   CoursesProvider coursesProvider,
   int userId,
   Lecture lecture,
+  int lectureIndex,
   bool value,
   Function callBack,
 }) async {
@@ -69,5 +71,5 @@ Future<void> toggleIsLectureCompleted({
     value: value,
   );
   // Running callBack function setState
-  callBack();
+  callBack(lectureIndex);
 }

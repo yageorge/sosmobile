@@ -26,7 +26,7 @@ class CoursesApi {
   }
 
   // Enroll current user to a course
-  Future enrollToCourse(
+  Future enroll(
     int userId,
     int courseId,
   ) async {
@@ -39,6 +39,26 @@ class CoursesApi {
           'user_id': userId.toString(),
           'course_id': courseId.toString(),
         },
+      );
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw 'A problem occurred: ${response.reasonPhrase}';
+      }
+    } catch (e) {
+      throw 'Catch error enrollToCourse() $e';
+    }
+  }
+
+// DisEnroll current user from a course
+  Future disEnroll(
+    int courseId,
+  ) async {
+    try {
+      final String url = "${sharedPrefs.apiUrl}enrollments/$courseId";
+      final response = await http.delete(
+        url,
+        headers: {'Authorization': token},
       );
       if (response.statusCode == 200) {
         return json.decode(response.body);

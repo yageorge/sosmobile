@@ -1,20 +1,44 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/course.dart';
 import '../../../../services/providers/courses_provider.dart';
-import 'package:sosmobile/models/course.dart';
 import '../../../../services/sharedPrefs.dart';
+import '../../../../widgets/alert_modal.dart';
 
-Future<void> enrollUserToCourse({
+Future<void> enrollUserInCourse({
   CoursesProvider coursesProvider,
   int userId,
   Course course,
   Function callBack,
 }) async {
-  await coursesProvider.enrollUserToCourse(
+  await coursesProvider.enroll(
     userId: userId,
     course: course,
   );
   callBack();
+}
+
+Future<void> disEnrollUserFromCourse({
+  BuildContext ctx,
+  CoursesProvider coursesProvider,
+  Course course,
+  Function callBack,
+}) async {
+  // Confirm DisEnrollment
+  bool confirmationResult = await getAlertModal(
+    ctx: ctx,
+    isQuestion: true,
+    title: 'Are you sure?',
+    message: 'All your progress will be lost in relation to this course!',
+  );
+
+  // On confirmation => disEnroll
+  if (confirmationResult) {
+    await coursesProvider.disEnroll(
+      course: course,
+    );
+    callBack();
+  }
 }
 
 // Enroll Button / Already Enrolled
@@ -37,7 +61,7 @@ Widget getEnrollButton({
       ),
       child: Center(
         child: Text(
-          course.isUserEnrolled ? 'Enrolled' : 'Enroll',
+          course.isUserEnrolled ? 'DisEnroll' : 'Enroll',
           style: Theme.of(ctx)
               .textTheme
               .headline4
@@ -46,8 +70,13 @@ Widget getEnrollButton({
       ),
     ),
     onTap: course.isUserEnrolled
-        ? null
-        : () => enrollUserToCourse(
+        ? () => disEnrollUserFromCourse(
+              ctx: ctx,
+              coursesProvider: coursesProvider,
+              course: course,
+              callBack: callBack,
+            )
+        : () => enrollUserInCourse(
               coursesProvider: coursesProvider,
               userId: userId,
               course: course,

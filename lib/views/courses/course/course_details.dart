@@ -67,9 +67,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                           userId: sharedPrefs.userId,
                           callBack: () {
                             // setState to refresh the isComplete boolean
-                            setState(() {
-                              print('setState RAN RAN RAN');
-                            });
+                            setState(() {});
                           }),
 
                       // number of Lectures - minutes - points

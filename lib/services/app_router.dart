@@ -43,7 +43,6 @@ class AppRouter extends StatelessWidget {
       final String _intro = await storage.getStorageValue(
         id: "intro",
       );
-      print('_intro type : ${_intro.runtimeType}');
       if (_userToken != null && _user != null && _department != null) {
         // convert user + department storage info to user provider
         await _userProvider.setCurrentUser(
@@ -59,7 +58,6 @@ class AppRouter extends StatelessWidget {
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(builder: (context) => Home()), (r) => false);
       } else {
-        print('_intro type : ${_intro.runtimeType}');
         // check if user / first time app run:
         if (_intro == null) {
           // Navigate to Intro

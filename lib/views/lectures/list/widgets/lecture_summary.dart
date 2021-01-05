@@ -42,13 +42,13 @@ class LectureSummary extends StatelessWidget {
       Course course,
       List<Lecture> lectures,
       int indexLecture,
-    ) {
+    ) async {
       // Check if course is enrolled
       if (course.isUserEnrolled) {
         navigateToLecture(lectures, indexLecture);
       } else {
         // if user is not enrolled: Show alert
-        getAlertModal(
+        await getAlertModal(
           ctx: context,
           isQuestion: false,
           title: 'You are not enrolled!',

@@ -17,15 +17,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('home.dart BUILD ran ran');
-
     CoursesProvider _coursesProvider =
         Provider.of<CoursesProvider>(context, listen: false);
     List<Course> _courses;
 
     // Fetching Courses
     Future<void> getCourses() async {
-      print(' Future<void> getCourses() async {');
       await _coursesProvider.updateCoursesData();
       _courses = _coursesProvider.coursesData;
       return true;

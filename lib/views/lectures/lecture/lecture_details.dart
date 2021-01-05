@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:provider/provider.dart';
@@ -81,6 +83,13 @@ class _LectureDetailsState extends State<LectureDetails> {
       });
     }
 
+    Void isCompletedToggleCallBack(int currentLectureIndex) {
+      // setState to refresh the isComplete boolean
+      setState(() {
+        index = currentLectureIndex;
+      });
+    }
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
@@ -141,17 +150,13 @@ class _LectureDetailsState extends State<LectureDetails> {
 
                             // Lecture Body:
                             getLectureBody(
-                                ctx: context,
-                                coursesProvider: _coursesProvider,
-                                index: index,
-                                lecture: lectures[index],
-                                userId: sharedPrefs.userId,
-                                callBack: () {
-                                  // setState to refresh the isComplete boolean
-                                  setState(() {
-                                    print('setState RAN RAN RAN');
-                                  });
-                                }),
+                              ctx: context,
+                              coursesProvider: _coursesProvider,
+                              index: index,
+                              lecture: lectures[index],
+                              userId: sharedPrefs.userId,
+                              callBack: isCompletedToggleCallBack,
+                            ),
 
                             // Video Thumbnail Button
                             if (lectures[index].urlVideo.isNotEmpty)

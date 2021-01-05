@@ -80,7 +80,6 @@ class AuthProvider with ChangeNotifier {
     try {
       // API call
       final response = await authApi.logout();
-      print('logoutUser() response: $response');
 
       // on success
       if (response['success'] != null) {

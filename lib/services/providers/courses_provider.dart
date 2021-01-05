@@ -5,8 +5,6 @@ import '../../models/course.dart';
 import '../../models/lecture.dart';
 
 class CoursesProvider with ChangeNotifier {
-  
-
   final CoursesApi coursesApi = CoursesApi();
 
   List<Course> _courses = [];
@@ -18,7 +16,6 @@ class CoursesProvider with ChangeNotifier {
 
   // Get courses data from server
   Future<void> updateCoursesData() async {
-    print(' Future<void> updateCoursesData() async {');
     // API get call
     final response = await coursesApi.getCourses();
     // Converting response to Course
@@ -29,17 +26,42 @@ class CoursesProvider with ChangeNotifier {
   }
 
   // Enroll current user to a course
-  Future<void> enrollUserToCourse({
+  Future<void> enroll({
     int userId,
     Course course,
   }) async {
     // API call
-    final response = await coursesApi.enrollToCourse(userId, course.id);
+    final response = await coursesApi.enroll(
+      userId,
+      course.id,
+    );
 
     // on success
     if (response['success'] != null) {
       // update course isUserEnrolled locally:
       course.isUserEnrolled = true;
+
+      // Update all courses - to render updated data in app
+      await updateCoursesData();
+    } else if (response['error'] != null) {
+      // manage this error to user
+      print('A problem occurred whith enrollUserToCourse');
+    }
+  }
+
+// DisEnroll current user to a course
+  Future<void> disEnroll({
+    Course course,
+  }) async {
+    // API call
+    final response = await coursesApi.disEnroll(
+      course.id,
+    );
+
+    // on success
+    if (response['success'] != null) {
+      // update course isUserEnrolled locally:
+      course.isUserEnrolled = false;
 
       // Update all courses - to render updated data in app
       await updateCoursesData();

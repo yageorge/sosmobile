@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
 
 import '../services/sharedPrefs.dart';
 import '../services/providers/user_provider.dart';
@@ -14,66 +15,66 @@ import '../views/auth/auth.dart';
 
 class AppRouter extends StatelessWidget {
   static const routeName = '/approuter';
+
   @override
   Widget build(BuildContext context) {
-    UserProvider _userProvider = Provider.of<UserProvider>(context);
+    UserProvider _userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+
     final SecureStorage storage = SecureStorage();
-    bool userAuthenticated = false;
+
     sharedPrefs.deviceHeight = MediaQuery.of(context).size.height;
     sharedPrefs.deviceWidth = MediaQuery.of(context).size.width;
     sharedPrefs.apiUrl = "http://10.0.2.2:8000/api/";
-    // To convert to User Provider
-    sharedPrefs.userId = 1;
 
     Future<void> checkUserAuthenticated() async {
       final String _userToken = await storage.getStorageValue(
         id: "userToken",
       );
 
-      User _user = _userProvider.user;
-      print('checkUserAuthenticated _userToken : $_userToken ');
-      print('checkUserAuthenticated _user email : ${_user.email} ');
-      if (_userToken.isNotEmpty) {
-        // Get user info from local storage and save in user provider
-        // USER PROVIDER is losing it;s content on app restart
-        userAuthenticated = true;
-        print('    userAuthenticated = true;');
+      final String _user = await storage.getStorageValue(
+        id: "user",
+      );
+
+      final String _department = await storage.getStorageValue(
+        id: "department",
+      );
+
+      final String _intro = await storage.getStorageValue(
+        id: "intro",
+      );
+      print('_intro type : ${_intro.runtimeType}');
+      if (_userToken != null && _user != null && _department != null) {
+        // convert user + department storage info to user provider
+        await _userProvider.setCurrentUser(
+          user: json.decode(_user),
+          department: json.decode(_department),
+        );
+
+        // save token to sharedprefs
+        sharedPrefs.userToken = _userToken;
+        sharedPrefs.userId = json.decode(_user)['id'];
+
+        // User authenticated => navigate home
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => Home()), (r) => false);
+      } else {
+        print('_intro type : ${_intro.runtimeType}');
+        // check if user / first time app run:
+        if (_intro == null) {
+          // Navigate to Intro
+          Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) => Intro()), (r) => false);
+        } else {
+          // User Unauthenticated => navigate to Auth
+          Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) => Auth()), (r) => false);
+        }
       }
     }
 
     checkUserAuthenticated();
 
-    if (userAuthenticated) {
-      // User is authenticated:
-      return Home();
-    }
-
-// if user is not Authenticated - Direct to Auth():
-    // if first login - show Into pages;
-    // Future.delayed(const Duration(milliseconds: 700), () {
-    //   Navigator.pushAndRemoveUntil(context,
-    //       MaterialPageRoute(builder: (context) => Home()), (r) => false);
-    // });
-
-    return Auth();
+    return SplashScreen();
   }
 }
-
-// did not work
-
-// FutureBuilder<bool>(
-//   future: checkUserAuthenticated(),
-//   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-//     if (!snapshot.hasData) {
-//       return loadingIndicator(
-//         ctx: context,
-//         deviceHeight: sharedPrefs.deviceHeight,
-//       );
-//     } else {
-//       if (userAuthenticated) {
-//         return Home();
-//       }
-//       return Auth();
-//     }
-//   },
-// );

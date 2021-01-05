@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'user_image.dart';
+import '../../../models/user.dart';
 
-// Logo Container UI
-Widget userHeader(BuildContext ctx) {
+// User Header
+Widget userHeader({
+  BuildContext ctx,
+  User user,
+}) {
   return Padding(
     padding: const EdgeInsets.all(18.0),
     child: Row(
@@ -21,16 +25,16 @@ Widget userHeader(BuildContext ctx) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'George Yaacoub',
+                '${user.firstName} ${user.lastName}',
                 style: Theme.of(ctx).textTheme.headline5,
               ),
               Text(
-                'gyaacoub@gmail.com',
-                style: Theme.of(ctx).textTheme.headline1,
+                user.email,
+                style: Theme.of(ctx).textTheme.headline2,
               ),
               Text(
-                'Developers',
-                style: Theme.of(ctx).textTheme.headline1,
+                user.department.name,
+                style: Theme.of(ctx).textTheme.headline2,
               ),
             ],
           ),

@@ -27,17 +27,17 @@ class Lecture {
 
 // Convert Json lecture to Lecture Model
 jsonToLecture(Map<String, dynamic> jsonLecture) => Lecture(
-      id: jsonLecture["id"] ?? 0,
-      title: jsonLecture["title"] ?? '',
-      content: jsonLecture["content"] ?? '',
-      urlVideo: jsonLecture["urlVideo"] ?? '',
-      duration: jsonLecture["duration"] ?? 0,
-      courseId: jsonLecture["course_id"] ?? 0,
-      createdAt: jsonLecture["created_at"] == null
+      id: jsonLecture['id'] ?? 0,
+      title: jsonLecture['title'] ?? '',
+      content: jsonLecture['content'] ?? '',
+      urlVideo: jsonLecture['urlVideo'] ?? '',
+      duration: jsonLecture['duration'] ?? 0,
+      courseId: jsonLecture['course_id'] ?? 0,
+      createdAt: jsonLecture['created_at'] == null
           ? null
-          : DateTime.parse(jsonLecture["created_at"]),
-      updatedAt: jsonLecture["updated_at"] == null
+          : DateTime.parse(jsonLecture['created_at']),
+      updatedAt: jsonLecture['updated_at'] == null
           ? null
-          : DateTime.parse(jsonLecture["updated_at"]),
-      isCompleted: jsonLecture["isCompleted"] ?? null,
+          : DateTime.parse(jsonLecture['updated_at']),
+      isCompleted: jsonLecture['isCompleted'] ?? null,
     );

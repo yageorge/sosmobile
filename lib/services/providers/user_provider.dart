@@ -11,30 +11,34 @@ class UserProvider with ChangeNotifier {
     return _user;
   }
 
-  // Get courses data from server
+  // Set User Model
   Future<void> setCurrentUser({
     dynamic user,
     dynamic department,
   }) async {
-    // Saving user in secure local device storage
-    await storage.setStorageValue(
-      id: "user",
-      value: user,
-    );
+    try {
+      // Converting response to Course
+      _user = jsonToUser(
+        jsonUser: user,
+        jsonDepartment: department,
+      );
+      // Notifying listeners
+      notifyListeners();
+    } catch (e) {
+      print('catch error setCurrentUser: $e');
+    }
+  }
 
-    // Saving department in secure local device storage
-    await storage.setStorageValue(
-      id: "department",
-      value: department,
-    );
+  // Remove User from provider
+  Future<void> removeCurrentUser() async {
+    try {
+      // Converting response to Course
+      _user = null;
 
-    // Converting response to Course
-    _user = jsonToUser(
-      jsonUser: user,
-      jsonDepartment: department,
-    );
-
-    // Notifying listeners
-    notifyListeners();
+      // Notifying listeners
+      notifyListeners();
+    } catch (e) {
+      print('catch error setCurrentUser: $e');
+    }
   }
 }

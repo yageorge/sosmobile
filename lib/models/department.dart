@@ -16,12 +16,12 @@ class Department {
 
 // Convert Json department to Department Model
 jsonToDepartment(Map<String, dynamic> jsonDepartment) => Department(
-      id: jsonDepartment["id"] ?? 0,
-      name: jsonDepartment["name"] ?? '',
-      createdAt: jsonDepartment["created_at"] == null
+      id: jsonDepartment['id'] ?? 0,
+      name: jsonDepartment['name'] ?? '',
+      createdAt: jsonDepartment['created_at'] == null
           ? null
-          : DateTime.parse(jsonDepartment["created_at"]),
-      updatedAt: jsonDepartment["updated_at"] == null
+          : DateTime.parse(jsonDepartment['created_at']),
+      updatedAt: jsonDepartment['updated_at'] == null
           ? null
-          : DateTime.parse(jsonDepartment["updated_at"]),
+          : DateTime.parse(jsonDepartment['updated_at']),
     );

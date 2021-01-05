@@ -29,6 +29,24 @@ class AuthApi {
     }
   }
 
-  // TODO Logout
+  // Logout user
+  Future logout() async {
+    try {
+      final String url = "${sharedPrefs.apiUrl}logout";
+      final String token = sharedPrefs.userToken;
 
+      final response = await http.get(
+        url,
+        headers: {'Authorization': token},
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw response.reasonPhrase;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 }

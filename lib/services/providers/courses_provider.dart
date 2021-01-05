@@ -5,6 +5,8 @@ import '../../models/course.dart';
 import '../../models/lecture.dart';
 
 class CoursesProvider with ChangeNotifier {
+  
+
   final CoursesApi coursesApi = CoursesApi();
 
   List<Course> _courses = [];

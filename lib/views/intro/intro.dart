@@ -23,12 +23,12 @@ class _IntroState extends State<Intro> {
   @override
   Widget build(BuildContext context) {
     // Style and design
-    const bodyStyle = TextStyle(fontSize: 19.0);
+    const bodyStyle = TextStyle(fontSize: 16.0);
     const pageDecoration = const PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
+      titleTextStyle: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.teal,
+      pageColor: Color(0xFFFFFF),
       imagePadding: EdgeInsets.zero,
     );
 
@@ -37,40 +37,51 @@ class _IntroState extends State<Intro> {
       pages: [
         buildScreen(
           pageDecoration,
-          'Screen 1 Titles',
-          'Instead of having to buy an entire share, invest any amount you want.',
+          'Skill Optimizer',
+          'A digital learning platform, every company Needs!',
           'intro_1.png',
         ),
         buildScreen(
           pageDecoration,
-          'Screen 2 Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
+          'Create Customized Material!',
+          'Create and allocate internal crafted training modules and courses',
           'intro_2.png',
         ),
         buildScreen(
           pageDecoration,
-          'Screen 3 Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
+          'Completed Modules Linked to KPIs',
+          'Set Points to courses and trainings, and use them to generate KPIs',
           'intro_3.jpg',
         ),
         buildScreen(
           pageDecoration,
-          'Screen 4 Title',
-          'Instead of having to buy an entire share, invest any amount you want.',
+          'On-The-Go Access!',
+          'Employees can access their training modules and courses on-the-go. IOS / Android apps',
           'intro_4.png',
         ),
       ],
       onDone: () => _onIntroEnd(context),
-      //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: const Text('Skip'),
-      next: const Icon(Icons.arrow_forward),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
+      skip: const Text(
+        'Skip',
+        style: TextStyle(color: Colors.teal),
+      ),
+      next: const Icon(
+        Icons.arrow_forward,
+        color: Colors.teal,
+      ),
+      done: const Text('Done',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.teal,
+          )),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Color(0xFFBDBDBD),
+        activeColor: Colors.teal,
         activeSize: Size(22.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),

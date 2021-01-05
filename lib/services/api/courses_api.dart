@@ -1,13 +1,11 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../storage/secure_storage.dart';
-
 import '../sharedPrefs.dart';
 
 class CoursesApi {
   // get user Token
-  final String token = getUserToken();
+  final String token = sharedPrefs.userToken;
 
   // Get all courses allocated to the current user's department
   Future getCourses() async {
@@ -88,10 +86,4 @@ class CoursesApi {
       throw 'Catch error toggleIsLectureCompleted() $e';
     }
   }
-}
-
-getUserToken() async {
-  final SecureStorage storage = SecureStorage();
-  final String token = await storage.getStorageValue(id: 'userToken');
-  return token;
 }

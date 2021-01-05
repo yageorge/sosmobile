@@ -30,17 +30,17 @@ jsonToUser({
   Map<String, dynamic> jsonDepartment,
 }) =>
     User(
-      id: jsonUser["id"] ?? 0,
-      firstName: jsonUser["firstName"] ?? '',
-      lastName: jsonUser["lastName"] ?? '',
-      email: jsonUser["email"] ?? '',
-      pointsTarget: jsonUser["pointsTarget"] ?? 0,
-      createdAt: jsonUser["created_at"] == null
+      id: jsonUser['id'] ?? 0,
+      firstName: jsonUser['firstName'] ?? '',
+      lastName: jsonUser['lastName'] ?? '',
+      email: jsonUser['email'] ?? '',
+      pointsTarget: jsonUser['pointsTarget'] ?? 0,
+      createdAt: jsonUser['created_at'] == null
           ? null
-          : DateTime.parse(jsonUser["created_at"]),
-      updatedAt: jsonUser["updated_at"] == null
+          : DateTime.parse(jsonUser['created_at']),
+      updatedAt: jsonUser['updated_at'] == null
           ? null
-          : DateTime.parse(jsonUser["updated_at"]),
+          : DateTime.parse(jsonUser['updated_at']),
       department:
           jsonDepartment == null ? null : jsonToDepartment(jsonDepartment),
     );

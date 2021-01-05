@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../services/providers/auth_provider.dart';
+import '../../services/providers/user_provider.dart';
+import '../../models/user.dart';
 import '../company/company_logo.dart';
-
-import './widgets/drawer_tab.dart';
 import '../images/user/user_header.dart';
+import '../../widgets/navigation_bar/navigation_bar.dart';
+import './widgets/drawer_tab.dart';
 
 import '../../views/auth/auth.dart';
 import '../../views/about/about.dart';
 import '../../views/home/home.dart';
 import '../../views/user_profile/user_profile.dart';
-import '../../widgets/navigation_bar/navigation_bar.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider _authProvider = Provider.of<AuthProvider>(context);
+    UserProvider _userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    User _user = _userProvider.user;
+
     return Drawer(
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -29,7 +37,10 @@ class AppDrawer extends StatelessWidget {
                 ),
 
                 // Current user details
-                userHeader(context),
+                userHeader(
+                  ctx: context,
+                  user: _user,
+                ),
 
                 // Home Tab
                 drawerTab(
@@ -81,9 +92,7 @@ class AppDrawer extends StatelessWidget {
                   ctx: context,
                   icon: Icons.lock,
                   title: 'Logout',
-                  onTapFn: () {
-                    Navigator.of(context).pushReplacementNamed(Auth.routeName);
-                  },
+                  onTapFn: () => _authProvider.logoutUser(context),
                 ),
 
                 //

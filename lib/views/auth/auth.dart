@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../../widgets/images/main_background.dart';
 import '../../services/providers/auth_provider.dart';
 import '../../services/app_router.dart';
@@ -51,6 +50,7 @@ class _AuthState extends State<Auth> {
           );
         }
       } catch (e) {
+        print('catch error in auth.dart $e');
         setState(() {
           errorMessage = e;
         });

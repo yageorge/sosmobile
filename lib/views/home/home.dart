@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../services/providers/user_provider.dart';
 import '../../services/providers/courses_provider.dart';
 import '../../services/sharedPrefs.dart';
+import '../../models/user.dart';
 import '../../models/course.dart';
 
 import '../../widgets/app_bar.dart';
@@ -19,6 +21,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     CoursesProvider _coursesProvider =
         Provider.of<CoursesProvider>(context, listen: false);
+    UserProvider _userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    User _user = _userProvider.user;
     List<Course> _courses;
 
     // Fetching Courses
@@ -28,6 +33,7 @@ class Home extends StatelessWidget {
       return true;
     }
 
+    print('home.dart BUILD RAN RAN');
     return Scaffold(
       drawer: AppDrawer(),
       appBar: appBar(context, 'Home'),
@@ -66,6 +72,7 @@ class Home extends StatelessWidget {
                       // Total completed + total Points
                       getUserStateSummary(
                         ctx: context,
+                        user: _user,
                         courses: _courses,
                       ),
                     ],

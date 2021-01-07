@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../helpers/color_converter.dart';
+
 class CourseCategory {
   final int id;
   final String name;
@@ -20,7 +22,7 @@ class CourseCategory {
 jsonToCourseCategory(Map<String, dynamic> jsonCategory) => CourseCategory(
       id: jsonCategory['id'] ?? 0,
       name: jsonCategory['name'] ?? '',
-      colorVal: jsonCategory['colorVal'] ?? '',
+      colorVal: colorConverter(jsonCategory['colorVal']) ?? '',
       createdAt: jsonCategory['created_at'] == null
           ? null
           : DateTime.parse(jsonCategory['created_at']),

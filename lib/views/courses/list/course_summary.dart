@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/course.dart';
+import '../../../models/courseCategory.dart';
 import '../../../models/lecture.dart';
 import '../course/course_details.dart';
 
@@ -22,8 +23,8 @@ class CourseSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Lecture> _lectures = course.lectures;
-    final _category = course.category;
-    final _categoryColor = Color(int.parse(_category.colorVal));
+    final CourseCategory _category = course.category;
+    final Color _categoryColor = Color(int.parse(_category.colorVal));
 
     onCourseTap(Course course) {
       Navigator.of(context).pushNamed(

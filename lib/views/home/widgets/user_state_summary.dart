@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/user.dart';
 import '../../../models/course.dart';
 import '../../../widgets/state_card.dart';
 
 Widget getUserStateSummary({
   BuildContext ctx,
+  User user,
   List<Course> courses,
 }) {
   // Counting for completed courses + Points
@@ -17,25 +19,41 @@ Widget getUserStateSummary({
     }
   });
 
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  return Column(
     children: [
-      // Points state
-      getStateCard(
-        ctx: ctx,
-        title: 'Points',
-        value: _completedCoursesPoints,
-        image: 'assets/images/app/points_progress.png',
-        color: Theme.of(ctx).primaryColor,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // Points Target
+          getStateCard(
+            ctx: ctx,
+            title: 'Target Points',
+            value: user.pointsTarget,
+            image: 'assets/images/app/target_progress.png',
+            color: Colors.blue[900],
+          ),
+
+          // Points state
+          getStateCard(
+            ctx: ctx,
+            title: 'Points',
+            value: _completedCoursesPoints,
+            image: 'assets/images/app/points_progress.png',
+            color: Theme.of(ctx).primaryColor,
+          ),
+        ],
       ),
 
       // Completed courses state
-      getStateCard(
-        ctx: ctx,
-        title: 'Completed Courses',
-        value: _completedCoursesCount,
-        image: 'assets/images/app/courses_progress.png',
-        color: Colors.blue[900],
+      Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: getStateCard(
+          ctx: ctx,
+          title: 'Completed Courses',
+          value: _completedCoursesCount,
+          image: 'assets/images/app/courses_progress.png',
+          color: Colors.blue[900],
+        ),
       ),
     ],
   );

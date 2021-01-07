@@ -30,6 +30,8 @@ class AuthProvider with ChangeNotifier {
         String _token = response['data']['token'];
         final String _userToken = 'Bearer $_token';
 
+        print('auth_provider _userToken: $_userToken');
+
         // Saving token in secure local device storage
         await storage.setStorageValue(
           id: 'userToken',
@@ -39,7 +41,6 @@ class AuthProvider with ChangeNotifier {
         // Get response user info:
         dynamic _user = response['data']['user'];
         dynamic _department = response['data']['department'];
-
         // Saving user / department / into in secure local device storage
         await storage.setStorageValue(
           id: 'user',

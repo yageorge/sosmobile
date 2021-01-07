@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -15,7 +16,9 @@ import './services/providers/courses_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //Initializing shared preferences
+  // Initialize Firebase
+  await Firebase.initializeApp();
+  // Initialize shared preferences
   await sharedPrefs.init();
   runApp(MyApp());
 }

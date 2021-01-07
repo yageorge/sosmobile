@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.5.3
+  firebase_auth: ^0.18.4+1
   http: ^0.12.2
   intl: ^0.16.1 #to handle dates
   provider: ^4.3.2+3

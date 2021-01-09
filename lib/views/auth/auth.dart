@@ -81,7 +81,7 @@ class _AuthState extends State<Auth> {
                     errorMessage: errorMessage,
                   ),
 
-                // Fooyer logo
+                // Footer logo
                 getFooterLogo(context),
               ],
             ),

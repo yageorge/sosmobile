@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../../services/providers/courses_provider.dart';
 import '../../../services/sharedPrefs.dart';
@@ -8,6 +9,7 @@ import '../../../widgets/drawer/app_drawer.dart';
 import '../../../widgets/loading_indicator.dart';
 import '../../../helpers/enums/coursesTabs.dart';
 
+import '../course/course_details.dart';
 import 'courses_list_view.dart';
 import '../../../models/course.dart';
 
@@ -62,10 +64,64 @@ class _CoursesState extends State<Courses> {
   }
 
   // pullRefresh
-  Future<void> pullRefresh() async {
+  Future<void> refreshData() async {
+    print('void refreshData() async {');
     // Setting _initRun true for getCourses to refresh courses
     _initRun = true;
     await getCourses();
+  }
+
+  // Load msg + load + navigate to course
+  loadNavigateCourse(dynamic message) {
+    // get new course:
+    final dynamic messageData = message['data'];
+    final int newCourseId = int.parse(messageData['courseId']);
+    final Course newCourse =
+        courses.singleWhere((course) => course.id == newCourseId);
+    // Navigate to new added course details
+    Navigator.of(context).pushNamed(
+      CourseDetails.routeName,
+      arguments: newCourse,
+    );
+  }
+
+  // Run Firebase Messaging services + configure onActions
+  // Courses page should run for FBM to work (potential: move to router)
+  void runFirebaseMessaging() async {
+    final fbm = FirebaseMessaging();
+    fbm.requestNotificationPermissions();
+    fbm.configure(
+      //onMessage: triggered if app is running on screen
+      onMessage: (message) async {
+        // Refresh Data
+        await refreshData();
+        // Load msg + load + navigate to course
+        loadNavigateCourse(message);
+        return;
+      },
+      //onLaunch: triggered if app is TERMINATED and we get a msg
+      onLaunch: (message) async {
+        // Refresh Data
+        await refreshData();
+        // Load msg + load + navigate to course
+        loadNavigateCourse(message);
+        return;
+      },
+      //onResume: triggered when app in BACKGROUND, and user presses on notification then app opens
+      onResume: (message) async {
+        // Refresh Data
+        await refreshData();
+        // Load msg + load + navigate to course
+        loadNavigateCourse(message);
+        return;
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    runFirebaseMessaging();
   }
 
   //TODO Notes pending: ---------------------------------------------------------------------------------
@@ -88,7 +144,7 @@ class _CoursesState extends State<Courses> {
           } else {
             // Pull down on screen to refresh Data indicator
             return RefreshIndicator(
-              onRefresh: () => pullRefresh(),
+              onRefresh: () => refreshData(),
               backgroundColor: Theme.of(context).primaryColor,
               color: Theme.of(context).accentColor,
               child: CoursesListView(

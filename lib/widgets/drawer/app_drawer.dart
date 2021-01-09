@@ -109,8 +109,8 @@ class AppDrawer extends StatelessWidget {
 
                 // SOS Logo
                 companyLogo(
-                  height: 64,
-                  width: 64,
+                  height: 84,
+                  width: 84,
                 ),
               ],
             ),

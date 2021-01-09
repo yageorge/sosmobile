@@ -33,7 +33,6 @@ class Home extends StatelessWidget {
       return true;
     }
 
-    print('home.dart BUILD RAN RAN');
     return Scaffold(
       drawer: AppDrawer(),
       appBar: appBar(context, 'Home'),

@@ -6,6 +6,7 @@ import '../sharedPrefs.dart';
 
 class AuthApi {
   FirebaseAuth auth = FirebaseAuth.instance;
+  final String token = sharedPrefs.userToken;
 
   // Login to Firebase + return firebase token
   Future<String> firebaseLogin({
@@ -30,7 +31,7 @@ class AuthApi {
     return _firebaseToken;
   }
 
-  // Login user
+  // Login user to laravel
   Future login({
     String email,
     String password,
@@ -86,6 +87,29 @@ class AuthApi {
       }
     } catch (e) {
       throw e;
+    }
+  }
+
+  // Saving user Firebase Messaging Token
+  Future saveFBMToken(String messagingToken) async {
+    try {
+      // Prepare url
+      final String url = "${sharedPrefs.apiUrl}cloudmessaging/save";
+
+      // Api savetoken request
+      final response = await http.post(
+        url,
+        headers: {'Authorization': token},
+        body: {'messagingToken': messagingToken},
+      );
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw response.reasonPhrase;
+      }
+    } catch (e) {
+      // throw e;
+      print('saveFBMToken catch error e: $e');
     }
   }
 }

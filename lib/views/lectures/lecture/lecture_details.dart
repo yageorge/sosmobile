@@ -65,8 +65,6 @@ class _LectureDetailsState extends State<LectureDetails> {
 
     // Handle previous lecture tap
     void previousLecture() {
-      // TODO
-      // Should mark Lecture as done as well
       setState(() {
         index = index - 1;
         loadUrlVideo(index);
@@ -75,8 +73,6 @@ class _LectureDetailsState extends State<LectureDetails> {
 
     // Handle next lecture tap
     void nextLecture() {
-      // TODO
-      // Should mark Lecture as done as well
       setState(() {
         index = index + 1;
         loadUrlVideo(index);

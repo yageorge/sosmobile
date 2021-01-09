@@ -9,9 +9,22 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
-        child: companyLogo(
-          height: 114,
-          width: 114,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            companyLogo(
+              height: 114,
+              width: 114,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Please wait...',
+              style:
+                  Theme.of(context).textTheme.headline5.copyWith(fontSize: 12),
+            ),
+          ],
         ),
       ),
     );

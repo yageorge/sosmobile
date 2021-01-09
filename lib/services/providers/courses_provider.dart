@@ -19,7 +19,9 @@ class CoursesProvider with ChangeNotifier {
     // API get call
     final response = await coursesApi.getCourses();
     // Converting response to Course
-    _courses = jsonToCourses(response.body);
+    if (response.body != null) {
+      _courses = jsonToCourses(response.body);
+    }
 
     // Notifying all _courses listeners
     notifyListeners();

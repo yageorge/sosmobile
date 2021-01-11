@@ -9,6 +9,7 @@ import '../widgets/course_image.dart';
 import 'widgets/header.dart';
 import 'widgets/properties.dart';
 import 'widgets/enroll_button.dart';
+import 'widgets/users_feedbacks_button.dart';
 
 import '../../../models/course.dart';
 import '../../lectures/list/lectures.dart';
@@ -74,6 +75,13 @@ class _CourseDetailsState extends State<CourseDetails> {
                       ),
                     ],
                   ),
+                ),
+
+                // Button link to User Feedbacks
+                getUsersFeedbacksButton(
+                  context,
+                  course,
+                  category,
                 ),
 
                 // Course lectures

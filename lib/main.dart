@@ -13,6 +13,8 @@ import './views/auth/auth.dart';
 import './services/providers/auth_provider.dart';
 import './services/providers/user_provider.dart';
 import './services/providers/courses_provider.dart';
+import './services/providers/userFeedbacks_provider.dart';
+import 'models/userFeedback.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,22 +35,39 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AuthProvider>(
-          create: (context) => AuthProvider(),
-        ),
-        ChangeNotifierProvider<UserProvider>(
-          create: (context) => UserProvider(),
-        ),
-        ChangeNotifierProvider<CoursesProvider>(
-          create: (context) => CoursesProvider(),
+        // Provider UserFeedBacksProvider to be on top of userFeedback Stream provider
+        ChangeNotifierProvider<UserFeedBacksProvider>(
+          create: (context) => UserFeedBacksProvider(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Skill Optimizer',
-        debugShowCheckedModeBanner: false,
-        theme: buildThemeData(context),
-        routes: buildRoutes(context),
-        home: AppRouter(),
+      child: Builder(
+        builder: (BuildContext bCtx) {
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider<AuthProvider>(
+                create: (bCtx) => AuthProvider(),
+              ),
+              ChangeNotifierProvider<UserProvider>(
+                create: (bCtx) => UserProvider(),
+              ),
+              ChangeNotifierProvider<CoursesProvider>(
+                create: (bCtx) => CoursesProvider(),
+              ),
+              StreamProvider<List<UserFeedback>>.value(
+                value:
+                    Provider.of<UserFeedBacksProvider>(bCtx).getUserFeedbacks,
+                initialData: List(),
+              ),
+            ],
+            child: MaterialApp(
+              title: 'Skill Optimizer',
+              debugShowCheckedModeBanner: false,
+              theme: buildThemeData(context),
+              routes: buildRoutes(context),
+              home: AppRouter(),
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'user_image.dart';
 import '../../../models/user.dart';
 
 // User Header
@@ -12,12 +11,16 @@ Widget userHeader({
     padding: const EdgeInsets.all(18.0),
     child: Row(
       children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(160.0)),
-          child: userImage(
-            imageUrl: user.urlImage,
-            height: 86,
-            width: 86,
+        Center(
+          child: CircleAvatar(
+            backgroundColor: Theme.of(ctx).accentColor,
+            radius: 42,
+            child: CircleAvatar(
+              radius: 39,
+              backgroundImage: NetworkImage(
+                user.urlImage,
+              ),
+            ),
           ),
         ),
         Container(

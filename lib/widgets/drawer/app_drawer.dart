@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../company/company_logo.dart';
+import '../images/user/user_header.dart';
 import '../../services/providers/auth_provider.dart';
 import '../../services/providers/user_provider.dart';
 import '../../models/user.dart';
-import '../company/company_logo.dart';
-import '../images/user/user_header.dart';
 import '../../widgets/navigation_bar/navigation_bar.dart';
 import './widgets/drawer_tab.dart';
 

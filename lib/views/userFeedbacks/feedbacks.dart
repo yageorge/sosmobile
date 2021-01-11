@@ -1,42 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:provider/provider.dart';
 
-import '../../../services/providers/courses_provider.dart';
-import '../../../services/sharedPrefs.dart';
-import '../../../models/courseCategory.dart';
-import '../../../models/course.dart';
-import '../../../models/lecture.dart';
+import '../../models/course.dart';
+import '../../models/courseCategory.dart';
+import '../courses/widgets/course_header.dart';
+import '../courses/widgets/course_image.dart';
 
-import '../../courses/widgets/course_image.dart';
-import '../../courses/widgets/course_header.dart';
-import 'widgets/body.dart';
-import 'widgets/nav_buttons.dart';
-import 'widgets/video_button.dart';
+import 'widgets/feedbacks_list.dart';
+import 'widgets/feedbacks_create.dart';
 
-class LectureDetails extends StatefulWidget {
-  static const routeName = '/lecture';
+class Feedbacks extends StatefulWidget {
+  static const routeName = '/users-feedback';
 
   @override
-  _LectureDetailsState createState() => _LectureDetailsState();
+  _FeedbacksState createState() => _FeedbacksState();
 }
 
-class _LectureDetailsState extends State<LectureDetails> {
+class _FeedbacksState extends State<Feedbacks> {
   Course course;
   CourseCategory category;
   Color categoryColor;
-  List<Lecture> lectures;
-  int index;
-  String urlVideo;
-  String urlId;
-
-  // loading video info if existing:
-  void loadUrlVideo(int _index) {
-    if (lectures[_index].urlVideo.isNotEmpty) {
-      urlVideo = lectures[_index].urlVideo;
-      urlId = YoutubePlayer.convertUrlToId(urlVideo);
-    }
-  }
 
   Future initData() async {
     // Retrieving modalRoute arguments as params
@@ -44,10 +26,6 @@ class _LectureDetailsState extends State<LectureDetails> {
     course = args['course'];
     category = course.category;
     categoryColor = Color(int.parse(category.colorVal));
-    lectures = args['lectures'];
-    index = args['index'];
-
-    loadUrlVideo(index);
   }
 
   @override
@@ -57,33 +35,26 @@ class _LectureDetailsState extends State<LectureDetails> {
     await initData();
   }
 
+  void _newFeedbackWindow(
+    BuildContext ctx,
+  ) {
+    showModalBottomSheet(
+      backgroundColor: Theme.of(ctx).scaffoldBackgroundColor,
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          child: FeedbacksCreate(
+            course: course,
+          ),
+          onTap: () {},
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    CoursesProvider _coursesProvider = Provider.of<CoursesProvider>(context);
-
-    // Handle previous lecture tap
-    void previousLecture() {
-      setState(() {
-        index = index - 1;
-        loadUrlVideo(index);
-      });
-    }
-
-    // Handle next lecture tap
-    void nextLecture() {
-      setState(() {
-        index = index + 1;
-        loadUrlVideo(index);
-      });
-    }
-
-    void isCompletedToggleCallBack(int currentLectureIndex) {
-      // setState to refresh the isComplete boolean
-      setState(() {
-        index = currentLectureIndex;
-      });
-    }
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
@@ -101,7 +72,7 @@ class _LectureDetailsState extends State<LectureDetails> {
                       iconTheme: IconThemeData(
                         color: Colors.grey[900],
                       ),
-                      expandedHeight: 132.0,
+                      expandedHeight: 102.0,
                       floating: true,
                       pinned: true,
                       snap: true,
@@ -122,7 +93,6 @@ class _LectureDetailsState extends State<LectureDetails> {
                           children: [
                             // Course name + category
                             Container(
-                              margin: EdgeInsets.only(bottom: 16),
                               decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.vertical(
                                   bottom: Radius.circular(16.0),
@@ -142,22 +112,10 @@ class _LectureDetailsState extends State<LectureDetails> {
                               ),
                             ),
 
-                            // Lecture Body:
-                            getLectureBody(
-                              ctx: context,
-                              coursesProvider: _coursesProvider,
-                              index: index,
-                              lecture: lectures[index],
-                              userId: sharedPrefs.userId,
-                              callBack: isCompletedToggleCallBack,
+                            // List of Feedbacks:
+                            FeedbacksList(
+                              courseId: course.id,
                             ),
-
-                            // Video Thumbnail Button
-                            if (lectures[index].urlVideo.isNotEmpty)
-                              getVideoButton(
-                                ctx: context,
-                                urlId: urlId,
-                              ),
                           ],
                         ),
                       ]),
@@ -165,17 +123,15 @@ class _LectureDetailsState extends State<LectureDetails> {
                   ],
                 ),
               ),
-
-              // Buttons Previous Next
-              getNavButtons(
-                index: index,
-                lecturesLength: lectures.length,
-                previousLectureFn: () => previousLecture(),
-                nextLectureFn: () => nextLecture(),
-              ),
             ],
           ),
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.tealAccent.withOpacity(0.6),
+        child: Icon(Icons.add),
+        onPressed: () => _newFeedbackWindow(context),
       ),
     );
   }

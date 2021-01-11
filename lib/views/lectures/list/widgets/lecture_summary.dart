@@ -61,8 +61,6 @@ class LectureSummary extends StatelessWidget {
     Lecture _lecture = lectures[index];
     Color categoryColor = Color(int.parse(course.category.colorVal));
 
-    //TODO do not allow user to load a lecture, unles he is ENROLLED to the course
-
     return InkWell(
       child: Container(
         padding: const EdgeInsets.all(8),

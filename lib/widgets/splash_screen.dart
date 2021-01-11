@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/company/company_logo.dart';
+import 'company/company_logo.dart';
 
 // Splash Screen to load on app Launch
 class SplashScreen extends StatelessWidget {

@@ -15,6 +15,7 @@ Widget userHeader({
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(160.0)),
           child: userImage(
+            imageUrl: user.urlImage,
             height: 86,
             width: 86,
           ),

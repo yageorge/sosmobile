@@ -51,57 +51,59 @@ class CourseSummary extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-          child: Stack(children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                //Course Image:
-                getCourseImage(
-                  ratio: 3,
-                  opacity: 0.9,
-                  urlImage: course.urlImage,
-                ),
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //Course Image:
+                  getCourseImage(
+                    ratio: 3,
+                    opacity: 0.9,
+                    urlImage: course.urlImage,
+                  ),
 
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // Course name + category
-                      Expanded(
-                        child: getCourseHeader(
-                          context,
-                          course.title,
-                          _category.name,
-                          _categoryColor,
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // Course name + category
+                        Expanded(
+                          child: getCourseHeader(
+                            context,
+                            course.title,
+                            _category.name,
+                            _categoryColor,
+                          ),
                         ),
-                      ),
 
-                      // number of Lectures - minutes - points
-                      getProperties(
-                        context,
-                        course,
-                      ),
-                    ],
+                        // number of Lectures - minutes - points
+                        getProperties(
+                          context,
+                          course,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
 
-                // Percent Progress indicator
-                if (course.isUserEnrolled)
-                  getPercentIndicator(
-                    ctx: context,
-                    lectures: _lectures,
-                  ),
-              ],
-            ),
-
-            // Course status None / Enrolled / Complete
-            if (course.isUserEnrolled)
-              status(
-                ctx: context,
-                isComplete: course.completedDate != null,
+                  // Percent Progress indicator
+                  if (course.isUserEnrolled)
+                    getPercentIndicator(
+                      ctx: context,
+                      lectures: _lectures,
+                    ),
+                ],
               ),
-          ]),
+
+              // Course status None / Enrolled / Complete
+              if (course.isUserEnrolled)
+                status(
+                  ctx: context,
+                  isComplete: course.completedDate != null,
+                ),
+            ],
+          ),
         ),
       ),
     );

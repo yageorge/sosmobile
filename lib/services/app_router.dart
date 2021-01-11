@@ -10,7 +10,7 @@ import '../services/api/auth_api.dart';
 
 import '../models/user.dart';
 import '../widgets/loading_indicator.dart';
-import '../views/splash_screen.dart';
+import '../widgets/splash_screen.dart';
 import '../views/home/home.dart';
 import '../views/intro/intro.dart';
 import '../views/auth/auth.dart';
@@ -27,7 +27,8 @@ class AppRouter extends StatelessWidget {
 
     sharedPrefs.deviceHeight = MediaQuery.of(context).size.height;
     sharedPrefs.deviceWidth = MediaQuery.of(context).size.width;
-    sharedPrefs.apiUrl = "http://10.0.2.2:8000/api/";
+    // sharedPrefs.apiUrl = "http://10.0.2.2:8000/api/";
+    sharedPrefs.apiUrl = "http://192.168.100.6:8000/api/";
 
     // -------------------- TODO -------------------------
     // When 0 courses => error / handle 0 courses / handle no url image => error

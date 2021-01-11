@@ -60,15 +60,11 @@ class _CourseDetailsState extends State<CourseDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Enroll Button
-                      getEnrollButton(
-                          ctx: context,
-                          coursesProvider: _coursesProvider,
-                          course: course,
-                          userId: sharedPrefs.userId,
-                          callBack: () {
-                            // setState to refresh the isComplete boolean
-                            setState(() {});
-                          }),
+                      EnrollButton(
+                        coursesProvider: _coursesProvider,
+                        course: course,
+                        userId: sharedPrefs.userId,
+                      ),
 
                       // number of Lectures - minutes - points
                       getProperties(

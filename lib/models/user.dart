@@ -6,6 +6,7 @@ class User {
   final int id;
   final String firstName;
   final String lastName;
+  final String urlImage;
   final String email;
   final int pointsTarget;
   final Department department;
@@ -16,6 +17,7 @@ class User {
     @required this.id,
     @required this.firstName,
     @required this.lastName,
+    @required this.urlImage,
     @required this.email,
     @required this.pointsTarget,
     @required this.department,
@@ -33,6 +35,7 @@ jsonToUser({
       id: jsonUser['id'] ?? 0,
       firstName: jsonUser['firstName'] ?? '',
       lastName: jsonUser['lastName'] ?? '',
+      urlImage: jsonUser['urlImage'] ?? '',
       email: jsonUser['email'] ?? '',
       pointsTarget: jsonUser['pointsTarget'] ?? 0,
       createdAt: jsonUser['created_at'] == null

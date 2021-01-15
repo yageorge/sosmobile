@@ -23,12 +23,14 @@ class AuthProvider with ChangeNotifier {
         email: email,
         password: password,
       );
-
+      print('auth_provider: response $response'); // with return: null
       // on success
-      if (response['success'] != null) {
+      if (response != null && response['success'] != null) {
         // Get + prepare token
         String _token = response['data']['token'];
         final String _userToken = 'Bearer $_token';
+
+        print('auth_provider _userToken: $_userToken');
 
         // Saving token in secure local device storage
         await storage.setStorageValue(
@@ -39,7 +41,6 @@ class AuthProvider with ChangeNotifier {
         // Get response user info:
         dynamic _user = response['data']['user'];
         dynamic _department = response['data']['department'];
-
         // Saving user / department / into in secure local device storage
         await storage.setStorageValue(
           id: 'user',
@@ -70,6 +71,8 @@ class AuthProvider with ChangeNotifier {
         return response['error'];
       }
     } catch (e) {
+      print(
+          'auth_provider: catch e $e'); // with return: NoSuchMethodError: The method '[]' was called on null
       throw e;
     }
     return '';

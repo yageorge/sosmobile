@@ -25,7 +25,7 @@ class _NavigationBarState extends State<NavigationBar> {
   // Load Navigation Bar Views
   void _setNavigationViews() {
     _views = [
-      {'screen': Courses(coursesTabs.all), 'title': 'Courses'},
+      {'screen': Courses(coursesTabs.all), 'title': 'Modules'},
       {'screen': Courses(coursesTabs.inProgress), 'title': 'In Progress'},
       {'screen': Courses(coursesTabs.completed), 'title': 'Completed'},
     ];

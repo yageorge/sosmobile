@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../company/company_logo.dart';
+import '../images/user/user_header.dart';
 import '../../services/providers/auth_provider.dart';
 import '../../services/providers/user_provider.dart';
 import '../../models/user.dart';
-import '../company/company_logo.dart';
-import '../images/user/user_header.dart';
 import '../../widgets/navigation_bar/navigation_bar.dart';
 import './widgets/drawer_tab.dart';
 
-import '../../views/auth/auth.dart';
 import '../../views/about/about.dart';
 import '../../views/home/home.dart';
 import '../../views/user_profile/user_profile.dart';
@@ -52,23 +51,15 @@ class AppDrawer extends StatelessWidget {
                   },
                 ),
 
-                // Courses
+                // Modules
                 drawerTab(
                   ctx: context,
                   icon: Icons.account_balance,
-                  title: 'Courses',
+                  title: 'Modules',
                   onTapFn: () {
                     Navigator.of(context)
                         .pushReplacementNamed(NavigationBar.routeName);
                   },
-                ),
-
-                // Connect
-                drawerTab(
-                  ctx: context,
-                  icon: Icons.connect_without_contact,
-                  title: 'Connect',
-                  onTapFn: () {},
                 ),
 
                 Divider(
@@ -109,8 +100,8 @@ class AppDrawer extends StatelessWidget {
 
                 // SOS Logo
                 companyLogo(
-                  height: 64,
-                  width: 64,
+                  height: 84,
+                  width: 84,
                 ),
               ],
             ),

@@ -28,9 +28,20 @@ Widget getInProgressCourse({
                 ),
           ),
         ),
-        CourseSummary(
-          course: _filteredCourses[0],
-        ),
+        _filteredCourses.length != 0
+            // Show course is user is enrolled to any
+            ? CourseSummary(
+                course: _filteredCourses[0],
+              )
+            // show message if not enrolled
+            : Container(
+                child: Text(
+                  'You have not enrolled to any courses yet!\nEnroll and start learning now!',
+                  style: Theme.of(ctx).textTheme.headline3.copyWith(
+                        color: Colors.grey,
+                      ),
+                ),
+              ),
       ],
     ),
   );

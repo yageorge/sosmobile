@@ -55,7 +55,7 @@ Widget getProperties(
         property(
           ctx: ctx,
           width: 44,
-          icon: Icons.local_parking,
+          icon: Icons.star,
           figure: course.points.toString(),
         ),
 

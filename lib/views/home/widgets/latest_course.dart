@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sosmobile/models/course.dart';
-import 'package:sosmobile/models/lecture.dart';
-import 'package:sosmobile/models/courseCategory.dart';
 
 import '../../courses/list/course_summary.dart';
 

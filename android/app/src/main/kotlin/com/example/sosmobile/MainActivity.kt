@@ -1,4 +1,4 @@
-package com.example.sosmobile
+package com.yageorge.skilloptimizer
 
 import io.flutter.embedding.android.FlutterActivity
 

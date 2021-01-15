@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:provider/provider.dart';
@@ -65,8 +63,6 @@ class _LectureDetailsState extends State<LectureDetails> {
 
     // Handle previous lecture tap
     void previousLecture() {
-      // TODO
-      // Should mark Lecture as done as well
       setState(() {
         index = index - 1;
         loadUrlVideo(index);
@@ -75,15 +71,13 @@ class _LectureDetailsState extends State<LectureDetails> {
 
     // Handle next lecture tap
     void nextLecture() {
-      // TODO
-      // Should mark Lecture as done as well
       setState(() {
         index = index + 1;
         loadUrlVideo(index);
       });
     }
 
-    Void isCompletedToggleCallBack(int currentLectureIndex) {
+    void isCompletedToggleCallBack(int currentLectureIndex) {
       // setState to refresh the isComplete boolean
       setState(() {
         index = currentLectureIndex;

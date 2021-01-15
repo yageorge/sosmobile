@@ -39,7 +39,7 @@ class _AuthState extends State<Auth> {
           email: email,
           password: password,
         );
-
+        print('auth.dart _response: $_response');
         // On success login, navigate to Home view:
         if (_response == "success") {
           Navigator.pushAndRemoveUntil(
@@ -50,6 +50,7 @@ class _AuthState extends State<Auth> {
           );
         }
       } catch (e) {
+        print('catch error auth.dart e: $e');
         setState(() {
           errorMessage = e;
         });
@@ -81,7 +82,7 @@ class _AuthState extends State<Auth> {
                     errorMessage: errorMessage,
                   ),
 
-                // Fooyer logo
+                // Footer logo
                 getFooterLogo(context),
               ],
             ),

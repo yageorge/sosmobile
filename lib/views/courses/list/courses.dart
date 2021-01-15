@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../../services/providers/courses_provider.dart';
 import '../../../services/sharedPrefs.dart';
@@ -7,7 +8,9 @@ import '../../../widgets/app_bar.dart';
 import '../../../widgets/drawer/app_drawer.dart';
 import '../../../widgets/loading_indicator.dart';
 import '../../../helpers/enums/coursesTabs.dart';
+import '../../../widgets/alert_modal.dart';
 
+import '../course/course_details.dart';
 import 'courses_list_view.dart';
 import '../../../models/course.dart';
 
@@ -57,18 +60,86 @@ class _CoursesState extends State<Courses> {
       courses = _coursesProvider.coursesData;
       _initRun = false;
     }
-    filteredCourses = await filterCourses(courses);
+    if (courses.length != 0) {
+      filteredCourses = await filterCourses(courses);
+    } else {
+      filteredCourses = [];
+    }
     return true;
   }
 
   // pullRefresh
-  Future<void> pullRefresh() async {
+  Future<void> refreshData() async {
+    print('void refreshData() async {');
     // Setting _initRun true for getCourses to refresh courses
     _initRun = true;
     await getCourses();
   }
 
-  //TODO Notes pending: ----------------------------------------------------------------------------------
+  // Load msg + load + navigate to course
+  Future<void> loadNavigateCourse(dynamic message) async {
+    // get new course:
+    final dynamic messageData = message['data'];
+    final int newCourseId = int.parse(messageData['courseId']);
+    final Course newCourse =
+        courses.singleWhere((course) => course.id == newCourseId);
+
+    // Confirm DisEnrollment
+    bool confirmationResult = await getAlertModal(
+      ctx: context,
+      isQuestion: true,
+      title: 'A new Module is added!',
+      message: 'Do you want to Load ${newCourse.title}?',
+    );
+
+    // On confirmation => load new course
+    if (confirmationResult) {
+      // Navigate to new added course details
+      Navigator.of(context).pushNamed(
+        CourseDetails.routeName,
+        arguments: newCourse,
+      );
+    }
+  }
+
+  // Run Firebase Messaging services + configure onActions
+  // Courses page should run for FBM to work (potential: move to router)
+  void runFirebaseMessaging() async {
+    final fbm = FirebaseMessaging();
+    fbm.requestNotificationPermissions();
+    fbm.configure(
+      //onMessage: triggered if app is running on screen
+      onMessage: (message) async {
+        // Refresh Data
+        await refreshData();
+        // Load msg + load + navigate to course
+        await loadNavigateCourse(message);
+        return;
+      },
+      //onLaunch: triggered if app is TERMINATED and we get a msg
+      onLaunch: (message) async {
+        // Refresh Data
+        await refreshData();
+        // Load msg + load + navigate to course
+        await loadNavigateCourse(message);
+        return;
+      },
+      //onResume: triggered when app in BACKGROUND, and user presses on notification then app opens
+      onResume: (message) async {
+        // Refresh Data
+        await refreshData();
+        // Load msg + load + navigate to course
+        await loadNavigateCourse(message);
+        return;
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    runFirebaseMessaging();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +147,7 @@ class _CoursesState extends State<Courses> {
 
     return Scaffold(
       drawer: AppDrawer(),
-      appBar: appBar(context, 'Courses'),
+      appBar: appBar(context, 'Modules'),
       body: FutureBuilder(
         future: getCourses(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -88,7 +159,7 @@ class _CoursesState extends State<Courses> {
           } else {
             // Pull down on screen to refresh Data indicator
             return RefreshIndicator(
-              onRefresh: () => pullRefresh(),
+              onRefresh: () => refreshData(),
               backgroundColor: Theme.of(context).primaryColor,
               color: Theme.of(context).accentColor,
               child: CoursesListView(

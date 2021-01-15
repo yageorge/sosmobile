@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../helpers/enums/coursesTabs.dart';
+import '../widgets/navigation_bar/navigation_bar.dart';
+
 import '../views/auth/auth.dart';
 import '../views/about/about.dart';
 import '../views/home/home.dart';
 import '../views/user_profile/user_profile.dart';
-import '../widgets/navigation_bar/navigation_bar.dart';
+import '../views/userFeedbacks/feedbacks.dart';
 import '../views/courses/list/courses.dart';
 import '../views/courses/course/course_details.dart';
 import '../views/lectures/lecture/lecture_details.dart';
 import '../views/lectures/video/video_player.dart';
-
-import '../helpers/enums/coursesTabs.dart';
 
 Map<String, Widget Function(BuildContext)> buildRoutes(BuildContext ctx) {
   return {
@@ -23,5 +24,6 @@ Map<String, Widget Function(BuildContext)> buildRoutes(BuildContext ctx) {
     CourseDetails.routeName: (ctx) => CourseDetails(),
     LectureDetails.routeName: (ctx) => LectureDetails(),
     VideoPlayer.routeName: (ctx) => VideoPlayer(),
+    Feedbacks.routeName: (ctx) => Feedbacks(),
   };
 }

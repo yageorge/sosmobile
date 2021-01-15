@@ -9,17 +9,17 @@ Widget getFooterLogo(BuildContext ctx) {
       bottomLeft: Radius.circular(86),
     ),
     child: Container(
-      height: 54,
+      height: 74,
       width: (MediaQuery.of(ctx).size.width - 72) > 176
           ? MediaQuery.of(ctx).size.width - 72
           : 176,
       decoration: BoxDecoration(
-        color: Theme.of(ctx).primaryColor,
+        color: Theme.of(ctx).primaryColor.withOpacity(1),
       ),
       padding: EdgeInsets.all(4),
       child: companyLogo(
-        height: 44,
-        width: 44,
+        height: 74,
+        width: 74,
       ),
     ),
   );

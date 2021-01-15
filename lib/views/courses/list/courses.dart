@@ -141,8 +141,6 @@ class _CoursesState extends State<Courses> {
     runFirebaseMessaging();
   }
 
-  //TODO Notes pending: ---------------------------------------------------------------------------------
-
   @override
   Widget build(BuildContext context) {
     _coursesProvider = Provider.of<CoursesProvider>(context);

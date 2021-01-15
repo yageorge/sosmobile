@@ -62,14 +62,6 @@ class AppDrawer extends StatelessWidget {
                   },
                 ),
 
-                // Connect TODO
-                // drawerTab(
-                //   ctx: context,
-                //   icon: Icons.connect_without_contact,
-                //   title: 'Connect',
-                //   onTapFn: () {},
-                // ),
-
                 Divider(
                   thickness: 1,
                   color: Theme.of(context).primaryColor,

@@ -8,8 +8,6 @@ import '../services/providers/user_provider.dart';
 import '../services/storage/secure_storage.dart';
 import '../services/api/auth_api.dart';
 
-import '../models/user.dart';
-import '../widgets/loading_indicator.dart';
 import '../widgets/splash_screen.dart';
 import '../views/home/home.dart';
 import '../views/intro/intro.dart';
@@ -29,9 +27,6 @@ class AppRouter extends StatelessWidget {
     sharedPrefs.deviceWidth = MediaQuery.of(context).size.width;
     // sharedPrefs.apiUrl = "http://10.0.2.2:8000/api/";
     sharedPrefs.apiUrl = "http://192.168.100.6:8000/api/";
-
-    // -------------------- TODO -------------------------
-    // When 0 courses => error / handle 0 courses / handle no url image => error
 
     Future<void> checkUserAuthenticated() async {
       // Delay this loading code, to leave 1.75 seconds for the splash screen to show

@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 
 import './styles/theme.dart';
 import './core/routes.dart';
 import './services/sharedPrefs.dart';
 import './services/app_router.dart';
-import './views/auth/auth.dart';
 
 import './services/providers/auth_provider.dart';
 import './services/providers/user_provider.dart';

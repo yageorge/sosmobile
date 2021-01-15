@@ -23,9 +23,9 @@ class AuthProvider with ChangeNotifier {
         email: email,
         password: password,
       );
-
+      print('auth_provider: response $response'); // with return: null
       // on success
-      if (response['success'] != null) {
+      if (response != null && response['success'] != null) {
         // Get + prepare token
         String _token = response['data']['token'];
         final String _userToken = 'Bearer $_token';
@@ -71,6 +71,8 @@ class AuthProvider with ChangeNotifier {
         return response['error'];
       }
     } catch (e) {
+      print(
+          'auth_provider: catch e $e'); // with return: NoSuchMethodError: The method '[]' was called on null
       throw e;
     }
     return '';

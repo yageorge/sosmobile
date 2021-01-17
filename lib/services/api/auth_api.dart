@@ -22,11 +22,10 @@ class AuthApi {
       // get firebase user token
       _firebaseToken = await _userCredential.user.getIdToken();
     } on FirebaseAuthException catch (e) {
-      print('error firebase auth: e.code ${e.code}');
       if (e.code == 'user-not-found') {
-        throw 'No user found for that email.';
+        throw 'wrong credentials';
       } else if (e.code == 'wrong-password') {
-        throw 'Wrong password provided for that user.';
+        throw 'wrong credentials';
       }
     }
     return _firebaseToken;
@@ -54,7 +53,7 @@ class AuthApi {
           'platform': 'mobile',
         },
       );
-      print('auth_api response: ${response.body}');
+
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
@@ -62,7 +61,7 @@ class AuthApi {
       }
     } catch (e) {
       // throw e;
-      print('auth_api catch error e: $e');
+      return {'error': e};
     }
   }
 

@@ -30,6 +30,9 @@ String prepareUserMessage(String message) {
     case 'Unauthorized':
       userMessage = 'Invalid Username/Password!';
       break;
+    case 'wrong credentials':
+      userMessage = 'Invalid Username/Password!';
+      break;
     case 'too-many-requests':
       userMessage = 'Too many Requests! Try again later.';
       break;

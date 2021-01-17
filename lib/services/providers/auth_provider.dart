@@ -13,24 +13,22 @@ class AuthProvider with ChangeNotifier {
   final UserProvider userProvider = UserProvider();
 
   // Login user
-  Future<String> loginUser({
+  Future<dynamic> loginUser({
     String email,
     String password,
   }) async {
     try {
       // API call
-      final response = await authApi.login(
+      final dynamic response = await authApi.login(
         email: email,
         password: password,
       );
-      print('auth_provider: response $response'); // with return: null
+
       // on success
       if (response != null && response['success'] != null) {
         // Get + prepare token
         String _token = response['data']['token'];
         final String _userToken = 'Bearer $_token';
-
-        print('auth_provider _userToken: $_userToken');
 
         // Saving token in secure local device storage
         await storage.setStorageValue(
@@ -68,11 +66,9 @@ class AuthProvider with ChangeNotifier {
         return 'success';
       } else if (response['error'] != null) {
         // Return response error
-        return response['error'];
+        return {'error': response['error']};
       }
     } catch (e) {
-      print(
-          'auth_provider: catch e $e'); // with return: NoSuchMethodError: The method '[]' was called on null
       throw e;
     }
     return '';

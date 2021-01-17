@@ -35,11 +35,11 @@ class _AuthState extends State<Auth> {
 
       try {
         // Hand user login
-        final String _response = await _authProvider.loginUser(
+        final dynamic _response = await _authProvider.loginUser(
           email: email,
           password: password,
         );
-        print('auth.dart _response: $_response');
+
         // On success login, navigate to Home view:
         if (_response == "success") {
           Navigator.pushAndRemoveUntil(
@@ -48,12 +48,13 @@ class _AuthState extends State<Auth> {
             // To remove all the routes below the pushed route
             (r) => false,
           );
+        } else if (_response['error'] != null) {
+          setState(() {
+            errorMessage = _response['error'];
+          });
         }
       } catch (e) {
-        print('catch error auth.dart e: $e');
-        setState(() {
-          errorMessage = e;
-        });
+        print('catch error in auth.dart e: $e');
       } finally {
         setState(() {
           _isLoading = false;

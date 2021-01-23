@@ -54,7 +54,7 @@ class _AuthState extends State<Auth> {
           });
         }
       } catch (e) {
-        print('catch error in auth.dart e: $e');
+        throw 'catch error in auth.dart e: $e';
       } finally {
         setState(() {
           _isLoading = false;

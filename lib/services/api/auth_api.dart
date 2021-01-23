@@ -108,8 +108,7 @@ class AuthApi {
         throw response.reasonPhrase;
       }
     } catch (e) {
-      // throw e;
-      print('saveFBMToken catch error e: $e');
+      throw e;
     }
   }
 }

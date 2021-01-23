@@ -25,7 +25,7 @@ class UserProvider with ChangeNotifier {
       // Notifying listeners
       notifyListeners();
     } catch (e) {
-      print('catch error setCurrentUser: $e');
+      throw 'catch error setCurrentUser: $e';
     }
   }
 
@@ -38,7 +38,7 @@ class UserProvider with ChangeNotifier {
       // Notifying listeners
       notifyListeners();
     } catch (e) {
-      print('catch error setCurrentUser: $e');
+      throw 'catch error setCurrentUser: $e';
     }
   }
 }

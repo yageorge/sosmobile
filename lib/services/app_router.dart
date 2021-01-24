@@ -25,7 +25,8 @@ class AppRouter extends StatelessWidget {
 
     sharedPrefs.deviceHeight = MediaQuery.of(context).size.height;
     sharedPrefs.deviceWidth = MediaQuery.of(context).size.width;
-    // sharedPrefs.apiUrl = "http://10.0.2.2:8000/api/";
+
+    // URL to be modified depending on the Laravel Serve address:
     sharedPrefs.apiUrl = "http://192.168.100.6:8000/api/";
 
     Future<void> checkUserAuthenticated() async {

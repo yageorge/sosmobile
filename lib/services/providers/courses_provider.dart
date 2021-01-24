@@ -48,7 +48,7 @@ class CoursesProvider with ChangeNotifier {
       await updateCoursesData();
     } else if (response['error'] != null) {
       // manage this error to user
-      print('A problem occurred whith enrollUserToCourse');
+      throw 'A problem occurred whith enrollUserToCourse';
     }
   }
 
@@ -70,7 +70,7 @@ class CoursesProvider with ChangeNotifier {
       await updateCoursesData();
     } else if (response['error'] != null) {
       // manage this error to user
-      print('A problem occurred whith enrollUserToCourse');
+      throw 'A problem occurred whith enrollUserToCourse';
     }
   }
 
@@ -93,7 +93,7 @@ class CoursesProvider with ChangeNotifier {
       await updateCoursesData();
     } else if (response['error'] != null) {
       // manage this error to user
-      print('A problem occurred whith toggleIsLectureCompleted');
+      throw 'A problem occurred whith toggleIsLectureCompleted';
     }
   }
 }

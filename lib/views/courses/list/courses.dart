@@ -70,7 +70,6 @@ class _CoursesState extends State<Courses> {
 
   // pullRefresh
   Future<void> refreshData() async {
-    print('void refreshData() async {');
     // Setting _initRun true for getCourses to refresh courses
     _initRun = true;
     await getCourses();

@@ -1,6 +1,9 @@
-<p align="center"><a href="https://flutter.dev/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png" width="400"></a></p>
+<p align="center"><a href="https://flutter.dev/" target="_blank"><img src="https://miro.medium.com/max/2160/1*vih036gD7fwgfj2jXHgKHA.png" width="400"></a></p>
 
 Skill Optimizer - Mobile / Employees
+
+<p align="left"><a target="_blank"><img src="https://firebasestorage.googleapis.com/v0/b/skill-optimizer.appspot.com/o/images%2Fsos_logo.png?alt=media&token=aaaaf437-54b2-4e8a-a5d4-bd2d3d3b83cf" width="120"></a></p>
+
 
 ## Getting Started
 

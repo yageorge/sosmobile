@@ -24,3 +24,9 @@ In file app_router.dart / line 30 / change the IP accordingly to your Laravel ho
 
 . Run the app
     Important note: A user should be created in the admin Panel / Website project, and this user should be used to login to the flutter App.
+
+ 3. Connect Firebase to Flutter project to use Authentication + Firestore + Cloud Storage:
+ . Official instructions to Add Firebase to a Flutter project:
+    https://firebase.google.com/docs/flutter/setup
+ Note: Google services path location:
+ android/app/google-services.json
